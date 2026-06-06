@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+venv/
+.env
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database files
+*.db
+
+# Environment files
+.env*
+.env.local
+
+# Keys and certificates
+*.pem
+*.key
+
+# Editor/workspace settings
+.vscode/
+.vscode/*
+
