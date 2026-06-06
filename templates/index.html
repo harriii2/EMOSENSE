@@ -208,6 +208,13 @@ footer strong{color:var(--accent3);}
 .scan-btn:hover{transform:scale(1.04);box-shadow:0 12px 42px rgba(109,40,217,.48);}
 .scan-btn.scanning{animation:scanPulse 1.5s infinite;}
 .scan-result{margin-top:1.5rem;display:none;}
+/* Scan layout */
+.scan-grid{display:flex;align-items:center;justify-content:center;gap:1.4rem;flex-wrap:wrap;}
+.scan-camera{flex:1;display:flex;align-items:center;justify-content:center;}
+.scan-controls{flex:0 0 260px;display:flex;flex-direction:column;align-items:center;}
+.btn-row{display:flex;gap:.6rem;align-items:center;justify-content:center;margin-top:1rem;}
+.scan-small{background:linear-gradient(135deg,var(--accent2),var(--accent));border:none;color:#fff;padding:.5rem .9rem;border-radius:10px;font-size:.9rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem}
+.scan-small.ghost{background:#ddd;color:#111;border:1px solid rgba(0,0,0,.06)}
 .emo-badge-large{display:inline-flex;align-items:center;gap:.6rem;padding:.7rem 1.8rem;border-radius:50px;font-size:1.2rem;font-weight:700;margin-bottom:.5rem;}
 .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.25rem;}
 .quick-btn{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem;cursor:pointer;transition:all .25s;text-align:center;}
@@ -226,7 +233,6 @@ footer strong{color:var(--accent3);}
 .ps-rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;}
 .ps-rec-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:1.3rem;cursor:pointer;transition:all .25s;text-decoration:none;color:var(--text);display:block;}
 .ps-rec-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 30px var(--glow);}
-.prc-icon{font-size:2rem;margin-bottom:.6rem;}
 .prc-name{font-size:.9rem;font-weight:700;margin-bottom:.25rem;}
 .prc-desc{font-size:.79rem;color:var(--muted);margin-bottom:.4rem;line-height:1.5;}
 .prc-badge{font-size:.7rem;font-family:'JetBrains Mono',monospace;color:var(--accent3);background:rgba(139,92,246,.12);padding:.22rem .55rem;border-radius:5px;display:inline-block;}
@@ -304,7 +310,6 @@ footer strong{color:var(--accent3);}
 .rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
 .rec-item{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem;cursor:pointer;transition:all .25s;text-decoration:none;color:var(--text);display:block;}
 .rec-item:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 30px var(--glow);}
-.ri-icon{font-size:2.2rem;margin-bottom:.7rem;}
 .ri-name{font-size:.92rem;font-weight:700;margin-bottom:.25rem;}
 .ri-desc{font-size:.8rem;color:var(--muted);margin-bottom:.5rem;line-height:1.55;}
 .ri-badge{font-size:.7rem;font-family:'JetBrains Mono',monospace;color:var(--accent3);background:rgba(139,92,246,.1);padding:.22rem .6rem;border-radius:5px;display:inline-block;}
@@ -364,13 +369,12 @@ footer strong{color:var(--accent3);}
     <div class="about-title-block">
       <div class="sec-tag">About the Project</div>
       <h2>EmoSense: AI-Based Facial Emotion<br/>Detection & Wellness System</h2>
-      <p>An intelligent real-time web application built with deep learning and computer vision, capable of detecting and analyzing human emotions from facial expressions — and delivering personalized emotional wellness support.</p>
     </div>
     <div class="about-body">
-      <p><strong>EmoSense</strong> is an intelligent real-time system capable of detecting and analyzing human emotions from facial expressions using <strong>Convolutional Neural Networks (CNN)</strong>. Developed as a major academic project at the School of Engineering, Pokhara University, this system represents a convergence of computer vision, deep learning, and emotional wellness support, designed to bring emotional intelligence into everyday digital interactions.</p>
-      <p>The system identifies <strong>seven basic emotions</strong> — Angry, Disgust, Fear, Happy, Sad, Surprise, and Neutral — using a CNN model trained on publicly available datasets including <strong>FER2013</strong>, the <strong>Emotion Recognition in Nepali Ethnic Faces</strong> dataset, and the <strong>CK+ (Extended Cohn-Kanade) Dataset</strong>. Data augmentation techniques including rotation, flipping, scaling, and brightness adjustment are applied to improve model accuracy, robustness, and reliability across diverse real-world conditions.</p>
-      <p>Beyond detection, EmoSense integrates advanced wellness-oriented features: <strong>user authentication</strong> and secure account management, comprehensive emotion history tracking, daily diary management, <strong>AI chatbot interaction</strong> that responds based on the user's detected emotional state, personalized music and video recommendations, daily inspirational quotes, and <strong>emergency email notifications</strong> via SMTP for critical emotional conditions — all delivered through a Flask-based web application with a clean, accessible interface.</p>
-      <p>This project demonstrates real-world applications of deep learning contributing to <strong>mental health assistance</strong>, smart healthcare, educational environments, customer experience analysis, and the development of emotionally intelligent AI systems that respond naturally to human needs. The inclusion of the Nepali Ethnic Faces dataset also addresses cultural diversity in facial recognition, making the model more inclusive and relevant for South Asian users.</p>
+      <p>EmoSense is an intelligent real-time system capable of detecting and analyzing human emotions from facial expressions using Convolutional Neural Networks (CNN). Developed as a major academic project at the School of Engineering, Pokhara University, this system represents a convergence of computer vision, deep learning, and emotional wellness support, designed to bring emotional intelligence into everyday digital interactions.</p>
+      <p>The system identifies seven basic emotions — Angry, Disgust, Fear, Happy, Sad, Surprise, and Neutral — using a CNN model trained on publicly available datasets including FER2013, the Emotion Recognition in Nepali Ethnic Faces dataset, and the CK+ (Extended Cohn-Kanade) Dataset. Data augmentation techniques including rotation, flipping, scaling, and brightness adjustment are applied to improve model accuracy, robustness, and reliability across diverse real-world conditions.</p>
+      <p>Beyond detection, EmoSense integrates advanced wellness-oriented features: user authentication and secure account management, comprehensive emotion history tracking, daily diary management, AI chatbot interaction that responds based on the user's detected emotional state, personalized music and video recommendations, daily inspirational quotes, and emergency email notifications via SMTP for critical emotional conditions — all delivered through a Flask-based web application with a clean, accessible interface.</p>
+      <p>This project demonstrates real-world applications of deep learning contributing to mental health assistance, smart healthcare, educational environments, customer experience analysis, and the development of emotionally intelligent AI systems that respond naturally to human needs. The inclusion of the Nepali Ethnic Faces dataset also addresses cultural diversity in facial recognition, making the model more inclusive and relevant for South Asian users.</p>
       <div class="tech-row">
         <span class="tech-chip">Python 3.x</span><span class="tech-chip">TensorFlow</span><span class="tech-chip">Keras</span><span class="tech-chip">OpenCV</span><span class="tech-chip">Flask</span><span class="tech-chip">FER2013</span><span class="tech-chip">CK+ Dataset</span><span class="tech-chip">Nepali Ethnic Faces</span><span class="tech-chip">NumPy</span><span class="tech-chip">Pandas</span><span class="tech-chip">SQLite / MySQL</span><span class="tech-chip">SMTP</span><span class="tech-chip">HTML / CSS</span>
       </div>
@@ -449,7 +453,7 @@ footer strong{color:var(--accent3);}
   <div class="team-section">
     <div class="sec-tag">Development Team</div>
     <div class="sec-title">Submitted By</div>
-    <p class="sec-desc" style="color:var(--muted);font-size:.92rem;">School of Engineering · Faculty of Science and Technology · Pokhara University · May 2026</p>
+    <p class="sec-desc" style="color:var(--muted);font-size:.92rem;"></p>
     <div class="team-grid">
       <div class="team-card">
         <div class="t-av" style="background:linear-gradient(135deg,#6d28d9,#8b5cf6);">A</div>
@@ -477,7 +481,7 @@ footer strong{color:var(--accent3);}
       </div>
     </div>
   </div>
-  <footer><p><strong>© 2026 EmoSense.</strong> All Rights Reserved. &nbsp;·&nbsp; School of Engineering, Pokhara University &nbsp;·&nbsp; Bachelor of Software Engineering</p></footer>
+  <footer><p><strong>© 2026 EmoSense.</strong> All Rights Reserved. &nbsp;·&nbsp; School of Engineering, Pokhara University &nbsp;·&nbsp;</p></footer>
 </div>
 
 <!-- ══════════════════ LOGIN ══════════════════ -->
@@ -487,101 +491,12 @@ footer strong{color:var(--accent3);}
 
     <!-- LOGIN -->
     <div class="auth-card" id="login-card">
-      <h2>Welcome Back 👋</h2>
-      <p class="sub">Login to access your EmoSense dashboard<br/><span class="req">* All fields are required</span></p>
+      <h2>Welcome Back</h2>
+      <p class="sub">Login to access your EmoSense dashboard<br/></p>
       <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" id="login-email" placeholder="you@example.com"/></div>
       <div class="field"><label>Password <span class="req">*</span></label><input type="password" id="login-pass" placeholder="••••••••"/><div class="forgot"><span onclick="showForgot()">Forgot password?</span></div></div>
       <button class="auth-btn" onclick="doLogin()">Login to Dashboard</button>
       <div class="auth-switch">New user? <span onclick="showRegister()">Create an account</span></div>
-      <!-- XAMPP CONNECTION CODE -->
-      <div class="section-divider"></div>
-      <div class="xampp-toggle">
-        <button class="xampp-toggle-btn" onclick="toggleXampp('xb1')">⚙️ View XAMPP / PHP Connection Code</button>
-        <div class="xampp-box" id="xb1">
-          <div class="xt">📁 config/db.php — Database Connection</div>
-          <pre>&lt;?php
-// config/db.php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');       // XAMPP default
-define('DB_PASS', '');           // XAMPP default (empty)
-define('DB_NAME', 'emosense_db');
-
-$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-if (!$conn) {
-    die(json_encode(['error' => 'DB connection failed: ' . mysqli_connect_error()]));
-}
-?&gt;</pre>
-          <div class="xt" style="margin-top:.9rem;">📁 auth/login.php — Login Handler</div>
-          <pre>&lt;?php
-require '../config/db.php';
-header('Content-Type: application/json');
-$data = json_decode(file_get_contents('php://input'), true);
-$email = mysqli_real_escape_string($conn, $data['email']);
-$pass  = $data['password'];
-$res = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
-$user = mysqli_fetch_assoc($res);
-if ($user && password_verify($pass, $user['password'])) {
-    session_start();
-    $_SESSION['user_id'] = $user['id'];
-    echo json_encode(['success' => true, 'name' => $user['full_name'], 'email' => $user['email']]);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid credentials']);
-}
-?&gt;</pre>
-          <div class="xt" style="margin-top:.9rem;">📁 SQL — Create Tables</div>
-          <pre>CREATE DATABASE emosense_db;
-USE emosense_db;
-
-CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  full_name VARCHAR(100) NOT NULL,
-  email VARCHAR(150) UNIQUE NOT NULL,
-  phone VARCHAR(20),
-  location VARCHAR(100),
-  password VARCHAR(255) NOT NULL,
-  trusted_email VARCHAR(150),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE emotion_history (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  emotion VARCHAR(50),
-  confidence DECIMAL(5,2),
-  detected_date DATE,
-  detected_time TIME,
-  FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
-CREATE TABLE diary (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  entry_text TEXT,
-  entry_date DATE,
-  entry_time TIME,
-  FOREIGN KEY (user_id) REFERENCES users(id)
-);</pre>
-          <div class="xt" style="margin-top:.9rem;">📁 auth/register.php — Register Handler</div>
-          <pre>&lt;?php
-require '../config/db.php';
-header('Content-Type: application/json');
-$data = json_decode(file_get_contents('php://input'), true);
-$name  = mysqli_real_escape_string($conn, $data['full_name']);
-$email = mysqli_real_escape_string($conn, $data['email']);
-$phone = mysqli_real_escape_string($conn, $data['phone']);
-$loc   = mysqli_real_escape_string($conn, $data['location']);
-$trust = mysqli_real_escape_string($conn, $data['trusted_email']);
-$hash  = password_hash($data['password'], PASSWORD_BCRYPT);
-$sql = "INSERT INTO users (full_name,email,phone,location,password,trusted_email)
-        VALUES ('$name','$email','$phone','$loc','$hash','$trust')";
-if (mysqli_query($conn, $sql)) {
-    echo json_encode(['success' => true]);
-} else {
-    echo json_encode(['success' => false, 'message' => mysqli_error($conn)]);
-}
-?&gt;</pre>
-        </div>
-      </div>
     </div>
 
     <!-- REGISTER -->
@@ -609,8 +524,19 @@ if (mysqli_query($conn, $sql)) {
     <div class="auth-card" id="forgot-card" style="display:none;">
       <h2>Reset Password 🔑</h2>
       <p class="sub">Enter your email to receive a password reset link</p>
-      <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" placeholder="you@example.com"/></div>
-      <button class="auth-btn" onclick="notify('✅ Reset link sent! Check your inbox.')">Send Reset Link</button>
+      <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" id="forgot-email" placeholder="you@example.com"/></div>
+      <button class="auth-btn" onclick="doForgot()">Send Reset Link</button>
+      <div class="auth-switch"><span onclick="showLogin()">← Back to Login</span></div>
+    </div>
+
+    <!-- RESET PASSWORD -->
+    <div class="auth-card" id="reset-card" style="display:none;">
+      <h2>Choose a New Password 🔐</h2>
+      <p class="sub">Enter your new password to complete the reset.</p>
+      <input type="hidden" id="reset-token" />
+      <div class="field"><label>New Password <span class="req">*</span></label><input type="password" id="reset-pass" placeholder="New password"/></div>
+      <div class="field"><label>Confirm Password <span class="req">*</span></label><input type="password" id="reset-confirm" placeholder="Confirm password"/></div>
+      <button class="auth-btn" onclick="doReset()">Reset Password</button>
       <div class="auth-switch"><span onclick="showLogin()">← Back to Login</span></div>
     </div>
   </div>
@@ -674,17 +600,23 @@ if (mysqli_query($conn, $sql)) {
         <!-- ── SCAN EMOTION (full page) ── -->
         <div class="dash-panel" id="panel-scan">
           <h2 class="ptitle">Scan Emotion 📸</h2>
-          <p class="psub">EmoSense CNN model detects your emotion from webcam in real-time using OpenCV</p>
           <div class="scan-panel-wrap">
-            <div style="font-size:3.5rem;margin-bottom:1rem;">🎭</div>
-            <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;margin-bottom:.6rem;">Facial Emotion Detection</h3>
-            <p style="color:var(--muted);font-size:.95rem;margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.75;">Click below to activate your webcam. The EmoSense CNN model analyzes your facial expression and detects your emotional state instantly.</p>
-            <button class="scan-btn" id="scan-btn" onclick="startScan()"><span>🔍</span>Scan My Emotion</button>
-            <video id="scan-video" playsinline autoplay muted style="display:none;width:100%;max-width:640px;border-radius:18px;margin-top:1.5rem;border:1px solid rgba(139,92,246,.2);"></video>
-            <canvas id="capture-canvas" style="display:none;"></canvas>
-            <div class="scan-result" id="scan-result">
-              <div class="emo-badge-large" id="emo-badge"></div>
-              <p style="color:var(--muted);font-size:.85rem;font-family:'JetBrains Mono',monospace;" id="emo-conf"></p>
+            <div class="scan-grid">
+              <div class="scan-camera">
+                <video id="scan-video" playsinline autoplay muted style="display:none;width:100%;max-width:640px;border-radius:18px;border:1px solid rgba(139,92,246,.2);"></video>
+                <canvas id="capture-canvas" style="display:none;"></canvas>
+              </div>
+              <div class="scan-controls">
+                <div class="scan-result" id="scan-result" style="display:none;">
+                  <div class="emo-badge-large" id="emo-badge" style="font-size:1.1rem;font-weight:700;padding:0.6rem 0.9rem;border-radius:12px;">
+                    <!-- emotion text will be shown here -->
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <button class="scan-small" id="scan-btn" onclick="startScan()"><span>🔍</span> Scan</button>
+                  <button class="scan-small ghost" id="close-btn" onclick="closeCamera()" style="display:inline-flex;">✖ Close</button>
+                </div>
+              </div>
             </div>
             <!-- POST SCAN RECOMMENDATIONS -->
             <div class="post-scan" id="post-scan">
@@ -721,7 +653,7 @@ if (mysqli_query($conn, $sql)) {
         <div class="dash-panel" id="panel-chat">
           <div class="chat-wrap">
             <div class="chat-header">
-              <span style="font-size:1.3rem;">🧠</span>
+              <span style="font-size:1.3rem;"></span>
               <div>
                 <div style="font-size:.95rem;font-weight:700;font-family:'Playfair Display',serif;">EmoSense AI</div>
                 <div style="font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:.4rem;"><span class="bot-dot"></span>Online &amp; Ready</div>
@@ -764,7 +696,7 @@ if (mysqli_query($conn, $sql)) {
           </div>
           <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">
             <button class="btn-primary" onclick="loadQuote()">✨ Get New Quote</button>
-            <button class="btn-ghost" onclick="loadQuoteByEmotion()">🎭 Quote for My Emotion</button>
+            <button class="btn-ghost" onclick="loadQuoteByEmotion()">Quote for My Emotion</button>
           </div>
         </div>
 
@@ -799,9 +731,9 @@ if (mysqli_query($conn, $sql)) {
               <div class="av-circle" onclick="notify('Photo upload — connect to your Flask backend!')">U</div>
               <p class="uph">Click avatar to upload profile photo</p>
               <div class="field"><label>Full Name</label><input type="text" id="acc-fname" placeholder="Your full name"/></div>
-              <div class="field"><label>Username</label><input type="text" id="acc-un" placeholder="Your username"/></div>
-              <div class="field"><label>Location</label><input type="text" placeholder="Pokhara, Nepal"/></div>
-              <div class="field"><label>Phone Number</label><input type="tel" placeholder="+977 9800000000"/></div>
+              <!-- <div class="field"><label>Username</label><input type="text" id="acc-un" placeholder="Your username"/></div> -->
+              <div class="field"><label>Location</label><input type="text" placeholder="XXXXXX"/></div>
+              <div class="field"><label>Phone Number</label><input type="tel" placeholder="9800000000"/></div>
               <button class="save-btn" style="width:100%;padding:.8rem;" onclick="notify('✅ Profile updated!')">Save Changes</button>
             </div>
             <div class="acc-card">
@@ -849,12 +781,24 @@ if (mysqli_query($conn, $sql)) {
 
 <script>
 /* ════════════ DATA ════════════ */
-let cu={name:'User',email:'user@example.com',trustedEmail:''};
+let cu={name:'User',email:'',trustedEmail:''};
 let scanHist=JSON.parse(localStorage.getItem('es_h')||'[]');
 let diaryE=JSON.parse(localStorage.getItem('es_d')||'[]');
 let currentDiaryIdx=-1;
 let scanStream = null;
 let sadCount=parseInt(localStorage.getItem('es_sad')||'0');
+let resetToken = '';
+
+// Emotion definitions with colors and emojis
+const emotions = [
+  {name:'Angry', emoji:'😠', color:'#e74c3c', bg:'rgba(231,76,60,.15)'},
+  {name:'Disgust', emoji:'🤢', color:'#27ae60', bg:'rgba(39,174,96,.15)'},
+  {name:'Fear', emoji:'😨', color:'#9b59b6', bg:'rgba(155,89,182,.15)'},
+  {name:'Happy', emoji:'😊', color:'#f39c12', bg:'rgba(243,156,18,.15)'},
+  {name:'Sad', emoji:'😢', color:'#3498db', bg:'rgba(52,152,219,.15)'},
+  {name:'Surprise', emoji:'😲', color:'#1abc9c', bg:'rgba(26,188,156,.15)'},
+  {name:'Neutral', emoji:'😐', color:'#95a5a6', bg:'rgba(149,165,166,.15)'}
+];
 
 /* ════════════ ROUTING ════════════ */
 function showPage(p){
@@ -870,17 +814,145 @@ function showPage(p){
 }
 
 /* ════════════ AUTH ════════════ */
-function showRegister(){lc(0);rc(1);fc(0);}
-function showLogin(){lc(1);rc(0);fc(0);}
-function showForgot(){lc(0);rc(0);fc(1);}
+async function authFetch(path, options){
+  const url = `/auth/${path}`;
+  return await fetch(url, options);
+}
+
+function showRegister(){lc(0);rc(1);fc(0);zc(0);}
+function showLogin(){lc(1);rc(0);fc(0);zc(0);}
+function showForgot(){lc(0);rc(0);fc(1);zc(0);}
+function showReset(token){
+  resetToken = token || '';
+  document.getElementById('reset-token').value = resetToken;
+  showPage('login');
+  lc(0);rc(0);fc(0);zc(1);
+}
 function lc(v){document.getElementById('login-card').style.display=v?'block':'none';}
 function rc(v){document.getElementById('register-card').style.display=v?'block':'none';}
 function fc(v){document.getElementById('forgot-card').style.display=v?'block':'none';}
-function doLogin(){
-  const e=document.getElementById('login-email').value||'user@example.com';
-  setUser(e,'User');showPage('dashboard');initDash();
+function zc(v){document.getElementById('reset-card').style.display=v?'block':'none';}
+async function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const password=document.getElementById('login-pass').value;
+  if(!email || !password){
+    notify('Please enter both email and password.');
+    return;
+  }
+  try{
+    const res=await authFetch('login', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,password})
+    });
+    const data=await res.json();
+    if(!data.success){
+      notify(data.message||'Invalid credentials.');
+      return;
+    }
+    setUser(data.email,data.name);
+    showPage('dashboard');
+    initDash();
+    notify(`Welcome back, ${data.name}!`);
+  }catch(err){
+    console.error(err);
+    notify('Login failed. Please try again later.');
+  }
 }
-function doRegister(){notify('✅ Account created! Please login.');setTimeout(showLogin,2000);}
+async function doRegister(){
+  const inputs = document.querySelectorAll('#register-card input');
+  const first = inputs[0].value.trim();
+  const last = inputs[1].value.trim();
+  const phone = inputs[2].value.trim();
+  const location = inputs[3].value.trim();
+  const email = inputs[4].value.trim();
+  const trusted = inputs[5].value.trim();
+  const password = inputs[6].value;
+  const confirm = inputs[7].value;
+  if(!first||!last||!email||!phone||!location||!trusted||!password||!confirm){
+    notify('Please fill in all registration fields.');
+    return;
+  }
+  if(password !== confirm){
+    notify('Passwords do not match.');
+    return;
+  }
+  try{
+    const fullName=`${first} ${last}`;
+    const res=await authFetch('register', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        full_name:fullName,
+        email,
+        phone,
+        location,
+        trusted_email:trusted,
+        password,
+        confirm_password:confirm
+      })
+    });
+    const data=await res.json();
+    if(!data.success){
+      notify(data.message||'Unable to create account.');
+      return;
+    }
+    notify('✅ Account created! Please login.');
+    setTimeout(showLogin,2000);
+  }catch(err){
+    console.error(err);
+    notify('Registration failed. Please try again later.');
+  }
+}
+async function doForgot(){
+  const email=document.getElementById('forgot-email').value.trim();
+  if(!email){
+    notify('Please enter your email address.');
+    return;
+  }
+  try{
+    const res=await authFetch('forgot', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email})
+    });
+    const data=await res.json();
+    notify(data.message || 'If this email is registered, a reset link has been sent.');
+  }catch(err){
+    console.error(err);
+    notify('Unable to send reset link. Please try again later.');
+  }
+}
+async function doReset(){
+  const password=document.getElementById('reset-pass').value;
+  const confirm=document.getElementById('reset-confirm').value;
+  const token=document.getElementById('reset-token').value || resetToken;
+  if(!token||!password||!confirm){
+    notify('Please complete both password fields.');
+    return;
+  }
+  if(password!==confirm){
+    notify('Passwords do not match.');
+    return;
+  }
+  try{
+    const res=await authFetch('reset-password', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({token,password,confirm_password:confirm})
+    });
+    const data=await res.json();
+    if(!data.success){
+      notify(data.message||'Unable to reset password.');
+      return;
+    }
+    notify(data.message||'Your password has been reset. You can now log in.');
+    showLogin();
+  }catch(err){
+    console.error(err);
+    notify('Unable to reset password. Please try again later.');
+  }
+}
 function doLogout(){showPage('landing');document.getElementById('main-nav').style.display='flex';}
 function setUser(email,name){
   cu.email=email;cu.name=name||email.split('@')[0];
@@ -904,7 +976,7 @@ function initDash(){
   if(h>=12&&h<17)g='Good afternoon';
   else if(h>=17&&h<21)g='Good evening';
   else if(h>=21)g='Good night';
-  document.getElementById('greet-msg').textContent=`${g}, ${cu.name}! 👋`;
+  document.getElementById('greet-msg').textContent=`${g}, ${cu.name}!`;
   if(document.getElementById('diary-date'))
     document.getElementById('diary-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   loadHistory();loadDiary();loadQuote();loadRecs();updateChatEmoLabel();
@@ -921,6 +993,7 @@ function showPanel(id){
   if(id==='recs')loadRecs();
   if(id==='quote')loadQuote();
   if(id==='chat')updateChatEmoLabel();
+  if(id==='scan')autoStartCamera();
   const panelTitles={home:'Dashboard - EmoSense', scan:'Scan Emotion - EmoSense', history:'Emotion History - EmoSense', chat:'AI Chatbot - EmoSense', diary:'Daily Diary - EmoSense', quote:'Daily Quote - EmoSense', recs:'Recommendations - EmoSense', account:'Account Settings - EmoSense'};
   document.title=panelTitles[id]||'EmoSense Dashboard';
 }
@@ -932,101 +1005,91 @@ document.addEventListener('click',e=>{
     document.getElementById('prof-popup').classList.remove('open');
 });
 
-/* ════════════ EMOTION DATA ════════════ */
-const emotions=[
-  {emoji:'😊',name:'Happy',color:'#facc15',bg:'rgba(250,204,21,.15)'},
-  {emoji:'😢',name:'Sad',color:'#60a5fa',bg:'rgba(96,165,250,.15)'},
-  {emoji:'😠',name:'Angry',color:'#ef4444',bg:'rgba(239,68,68,.15)'},
-  {emoji:'😲',name:'Surprise',color:'#fb923c',bg:'rgba(251,146,60,.15)'},
-  {emoji:'😨',name:'Fear',color:'#c084fc',bg:'rgba(192,132,252,.15)'},
-  {emoji:'🤢',name:'Disgust',color:'#4ade80',bg:'rgba(74,222,128,.15)'},
-  {emoji:'😐',name:'Neutral',color:'#94a3b8',bg:'rgba(148,163,184,.15)'},
-];
 
 /* MUSIC + VIDEO DATA per emotion */
 const recData={
   Happy:{
     music:[
-      {icon:'🎵',name:'Happy Hits Playlist',desc:'Upbeat tracks to celebrate your joy',badge:'Spotify · Pop',url:'https://open.spotify.com/playlist/37i9dQZF1DXdPec7aLTmlC'},
-      {icon:'🎶',name:'Feel Good Classics',desc:'Timeless happy songs for good vibes',badge:'Spotify · Classic',url:'https://open.spotify.com/playlist/37i9dQZF1DX9XIFQuFvzM4'},
-      {icon:'🎸',name:'Positive Energy Mix',desc:'High-energy tracks to keep you pumped',badge:'Spotify · Upbeat',url:'https://open.spotify.com/playlist/37i9dQZF1DX2sUQwD7tbmL'},
+      {name:'Happy Hits Playlist',desc:'Upbeat tracks to celebrate your joy',badge:'Spotify · Pop',url:'https://open.spotify.com/playlist/37i9dQZF1DXdPec7aLTmlC'},
+      {name:'Feel Good Classics',desc:'Timeless happy songs for good vibes',badge:'Spotify · Classic',url:'https://open.spotify.com/playlist/37i9dQZF1DX9XIFQuFvzM4'},
+      {name:'Positive Energy Mix',desc:'High-energy tracks to keep you pumped',badge:'Spotify · Upbeat',url:'https://open.spotify.com/playlist/37i9dQZF1DX2sUQwD7tbmL'},
     ],
     video:[
-      {icon:'🎬',name:'Comedy Shorts Compilation',desc:'Funny moments to keep you laughing',badge:'YouTube · Comedy',url:'https://www.youtube.com/results?search_query=funny+happy+compilation'},
-      {icon:'🌍',name:'Beautiful World Travel Vlogs',desc:'Stunning places to spark wanderlust',badge:'YouTube · Travel',url:'https://www.youtube.com/results?search_query=beautiful+world+travel+vlog'},
-      {icon:'🎭',name:'Happy Movie Clips',desc:'Uplifting scenes from feel-good movies',badge:'YouTube · Movies',url:'https://www.youtube.com/results?search_query=feel+good+movie+scenes'},
+      {name:'Comedy Shorts Compilation',desc:'Funny moments to keep you laughing',badge:'YouTube · Comedy',url:'https://www.youtube.com/results?search_query=funny+happy+compilation'},
+      {name:'Beautiful World Travel Vlogs',desc:'Stunning places to spark wanderlust',badge:'YouTube · Travel',url:'https://www.youtube.com/results?search_query=beautiful+world+travel+vlog'},
+      {name:'Happy Movie Clips',desc:'Uplifting scenes from feel-good movies',badge:'YouTube · Movies',url:'https://www.youtube.com/results?search_query=feel+good+movie+scenes'},
     ]
   },
   Sad:{
     music:[
-      {icon:'🎵',name:'Comfort &amp; Heal Playlist',desc:'Soft melodies to soothe a heavy heart',badge:'Spotify · Chill',url:'https://open.spotify.com/playlist/37i9dQZF1DX3YSRoSdA634'},
-      {icon:'🎶',name:'Uplifting Sad Songs',desc:'Songs that make sadness feel beautiful',badge:'Spotify · Emotional',url:'https://open.spotify.com/playlist/37i9dQZF1DX7qK8ma5wgG1'},
-      {icon:'🎹',name:'Calming Piano',desc:'Gentle piano pieces for emotional healing',badge:'Spotify · Classical',url:'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO'},
+      {name:'Comfort &amp; Heal Playlist',desc:'Soft melodies to soothe a heavy heart',badge:'Spotify · Chill',url:'https://open.spotify.com/playlist/37i9dQZF1DX3YSRoSdA634'},
+      {name:'Uplifting Sad Songs',desc:'Songs that make sadness feel beautiful',badge:'Spotify · Emotional',url:'https://open.spotify.com/playlist/37i9dQZF1DX7qK8ma5wgG1'},
+      {name:'Calming Piano',desc:'Gentle piano pieces for emotional healing',badge:'Spotify · Classical',url:'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO'},
     ],
     video:[
-      {icon:'🧘',name:'Guided Meditation for Sadness',desc:'5-min calming meditation session',badge:'YouTube · Meditation',url:'https://www.youtube.com/results?search_query=guided+meditation+for+sadness'},
-      {icon:'💬',name:'Motivational Talks',desc:'Inspiring speeches to lift your spirit',badge:'YouTube · Motivation',url:'https://www.youtube.com/results?search_query=motivational+speech+for+sad+days'},
-      {icon:'🌿',name:'Nature &amp; Rain Sounds',desc:'Relaxing nature sounds for emotional reset',badge:'YouTube · Relaxation',url:'https://www.youtube.com/results?search_query=relaxing+nature+sounds+rain'},
+      {name:'Guided Meditation for Sadness',desc:'5-min calming meditation session',badge:'YouTube · Meditation',url:'https://www.youtube.com/results?search_query=guided+meditation+for+sadness'},
+      {name:'Motivational Talks',desc:'Inspiring speeches to lift your spirit',badge:'YouTube · Motivation',url:'https://www.youtube.com/results?search_query=motivational+speech+for+sad+days'},
+      {name:'Nature &amp; Rain Sounds',desc:'Relaxing nature sounds for emotional reset',badge:'YouTube · Relaxation',url:'https://www.youtube.com/results?search_query=relaxing+nature+sounds+rain'},
     ]
   },
   Angry:{
     music:[
-      {icon:'🎵',name:'Chill Out &amp; Relax',desc:'Smooth tracks to cool down your anger',badge:'Spotify · Chill',url:'https://open.spotify.com/playlist/37i9dQZF1DX0s5kDXs5Vh3'},
-      {icon:'🎶',name:'Lo-fi Calm Mix',desc:'Low-fi beats to calm an angry mind',badge:'Spotify · Lo-fi',url:'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn'},
-      {icon:'🎸',name:'Release &amp; Let Go',desc:'Expressive music to channel strong feelings',badge:'Spotify · Alternative',url:'https://open.spotify.com/playlist/37i9dQZF1DX1s9knjP51Oa'},
+      {name:'Chill Out &amp; Relax',desc:'Smooth tracks to cool down your anger',badge:'Spotify · Chill',url:'https://open.spotify.com/playlist/37i9dQZF1DX0s5kDXs5Vh3'},
+      {name:'Lo-fi Calm Mix',desc:'Low-fi beats to calm an angry mind',badge:'Spotify · Lo-fi',url:'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn'},
+      {name:'Release &amp; Let Go',desc:'Expressive music to channel strong feelings',badge:'Spotify · Alternative',url:'https://open.spotify.com/playlist/37i9dQZF1DX1s9knjP51Oa'},
     ],
     video:[
-      {icon:'🧘',name:'Breathing Exercises',desc:'2-minute anger management breathing',badge:'YouTube · Wellness',url:'https://www.youtube.com/results?search_query=breathing+exercises+anger+management'},
-      {icon:'🥊',name:'Workout to Release Stress',desc:'Physical exercise to release tension',badge:'YouTube · Fitness',url:'https://www.youtube.com/results?search_query=workout+release+stress+anger'},
-      {icon:'😂',name:'Comedy to Lighten Up',desc:'Light humor to shift your mood quickly',badge:'YouTube · Comedy',url:'https://www.youtube.com/results?search_query=funny+comedy+clips+lighten+mood'},
+      {name:'Breathing Exercises',desc:'2-minute anger management breathing',badge:'YouTube · Wellness',url:'https://www.youtube.com/results?search_query=breathing+exercises+anger+management'},
+      {name:'Workout to Release Stress',desc:'Physical exercise to release tension',badge:'YouTube · Fitness',url:'https://www.youtube.com/results?search_query=workout+release+stress+anger'},
+      {name:'Comedy to Lighten Up',desc:'Light humor to shift your mood quickly',badge:'YouTube · Comedy',url:'https://www.youtube.com/results?search_query=funny+comedy+clips+lighten+mood'},
     ]
   },
   Surprise:{
     music:[
-      {icon:'🎵',name:'Exciting Discovery Mix',desc:'Adventurous tracks that match your surprise',badge:'Spotify · Indie',url:'https://open.spotify.com/playlist/37i9dQZF1DX2Nc3B70tvx0'},
-      {icon:'🎶',name:'Cinematic Adventures',desc:'Epic soundscapes for your curious mood',badge:'Spotify · Cinematic',url:'https://open.spotify.com/playlist/37i9dQZF1DX4OzrY981I1W'},
-      {icon:'🎸',name:'Energy &amp; Excitement',desc:'High energy mix to ride the wave',badge:'Spotify · Energetic',url:'https://open.spotify.com/playlist/37i9dQZF1DX2sUQwD7tbmL'},
+      {name:'Exciting Discovery Mix',desc:'Adventurous tracks that match your surprise',badge:'Spotify · Indie',url:'https://open.spotify.com/playlist/37i9dQZF1DX2Nc3B70tvx0'},
+      {name:'Cinematic Adventures',desc:'Epic soundscapes for your curious mood',badge:'Spotify · Cinematic',url:'https://open.spotify.com/playlist/37i9dQZF1DX4OzrY981I1W'},
+      {name:'Energy &amp; Excitement',desc:'High energy mix to ride the wave',badge:'Spotify · Energetic',url:'https://open.spotify.com/playlist/37i9dQZF1DX2sUQwD7tbmL'},
     ],
     video:[
-      {icon:'🔍',name:'Amazing Science Facts',desc:'Mind-blowing discoveries that will surprise you more',badge:'YouTube · Education',url:'https://www.youtube.com/results?search_query=amazing+science+facts+surprising'},
-      {icon:'🌌',name:'Universe Mysteries',desc:'Fascinating space exploration videos',badge:'YouTube · Space',url:'https://www.youtube.com/results?search_query=universe+mysteries+space+documentary'},
-      {icon:'🎩',name:'Magic &amp; Illusions',desc:'Incredible magic tricks to keep you amazed',badge:'YouTube · Entertainment',url:'https://www.youtube.com/results?search_query=best+magic+tricks+illusions'},
+      {name:'Amazing Science Facts',desc:'Mind-blowing discoveries that will surprise you more',badge:'YouTube · Education',url:'https://www.youtube.com/results?search_query=amazing+science+facts+surprising'},
+      {name:'Universe Mysteries',desc:'Fascinating space exploration videos',badge:'YouTube · Space',url:'https://www.youtube.com/results?search_query=universe+mysteries+space+documentary'},
+      {name:'Magic &amp; Illusions',desc:'Incredible magic tricks to keep you amazed',badge:'YouTube · Entertainment',url:'https://www.youtube.com/results?search_query=best+magic+tricks+illusions'},
     ]
   },
   Fear:{
     music:[
-      {icon:'🎵',name:'Courage &amp; Strength Playlist',desc:'Empowering music to face your fears',badge:'Spotify · Motivational',url:'https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0'},
-      {icon:'🎶',name:'Peaceful Mind',desc:'Soothing tracks to calm anxiety and fear',badge:'Spotify · Ambient',url:'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO'},
-      {icon:'🎹',name:'Healing Frequencies',desc:'432Hz and 528Hz healing music',badge:'Spotify · Healing',url:'https://open.spotify.com/playlist/37i9dQZF1DWU0ScTcjJBdj'},
+      {name:'Courage &amp; Strength Playlist',desc:'Empowering music to face your fears',badge:'Spotify · Motivational',url:'https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0'},
+      {name:'Peaceful Mind',desc:'Soothing tracks to calm anxiety and fear',badge:'Spotify · Ambient',url:'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO'},
+      {name:'Healing Frequencies',desc:'432Hz and 528Hz healing music',badge:'Spotify · Healing',url:'https://open.spotify.com/playlist/37i9dQZF1DWU0ScTcjJBdj'},
     ],
     video:[
-      {icon:'🧘',name:'Anxiety Relief Meditation',desc:'Calming meditation for fear and anxiety',badge:'YouTube · Meditation',url:'https://www.youtube.com/results?search_query=anxiety+relief+meditation'},
-      {icon:'💪',name:'Overcoming Fear Talks',desc:'Inspiring stories of courage and bravery',badge:'YouTube · Motivation',url:'https://www.youtube.com/results?search_query=overcoming+fear+motivational+talk'},
-      {icon:'🌊',name:'Ocean Waves &amp; Nature',desc:'Peaceful nature sounds for grounding',badge:'YouTube · Relaxation',url:'https://www.youtube.com/results?search_query=ocean+waves+sounds+relaxing'},
+      {name:'Anxiety Relief Meditation',desc:'Calming meditation for fear and anxiety',badge:'YouTube · Meditation',url:'https://www.youtube.com/results?search_query=anxiety+relief+meditation'},
+      {name:'Overcoming Fear Talks',desc:'Inspiring stories of courage and bravery',badge:'YouTube · Motivation',url:'https://www.youtube.com/results?search_query=overcoming+fear+motivational+talk'},
+      {name:'Ocean Waves &amp; Nature',desc:'Peaceful nature sounds for grounding',badge:'YouTube · Relaxation',url:'https://www.youtube.com/results?search_query=ocean+waves+sounds+relaxing'},
     ]
   },
   Disgust:{
     music:[
-      {icon:'🎵',name:'Fresh Start Playlist',desc:'Clean, refreshing music for a new perspective',badge:'Spotify · Fresh',url:'https://open.spotify.com/playlist/37i9dQZF1DX4WYpdgoIcn6'},
-      {icon:'🎶',name:'Mood Reset Mix',desc:'Uplifting tracks to reset your emotional state',badge:'Spotify · Uplifting',url:'https://open.spotify.com/playlist/37i9dQZF1DX9XIFQuFvzM4'},
-      {icon:'🎸',name:'Positive Vibes Only',desc:'Good energy music to shift your mood',badge:'Spotify · Pop',url:'https://open.spotify.com/playlist/37i9dQZF1DXdPec7aLTmlC'},
+      {name:'Fresh Start Playlist',desc:'Clean, refreshing music for a new perspective',badge:'Spotify · Fresh',url:'https://open.spotify.com/playlist/37i9dQZF1DX4WYpdgoIcn6'},
+      {name:'Mood Reset Mix',desc:'Uplifting tracks to reset your emotional state',badge:'Spotify · Uplifting',url:'https://open.spotify.com/playlist/37i9dQZF1DX9XIFQuFvzM4'},
+      {name:'Positive Vibes Only',desc:'Good energy music to shift your mood',badge:'Spotify · Pop',url:'https://open.spotify.com/playlist/37i9dQZF1DXdPec7aLTmlC'},
     ],
     video:[
-      {icon:'🌿',name:'Mindfulness Practice',desc:'Simple mindfulness exercises for emotional reset',badge:'YouTube · Wellness',url:'https://www.youtube.com/results?search_query=mindfulness+practice+emotional+reset'},
-      {icon:'😂',name:'Clean Comedy Shows',desc:'Light-hearted humor to shift your perspective',badge:'YouTube · Comedy',url:'https://www.youtube.com/results?search_query=clean+comedy+feel+good'},
-      {icon:'🍳',name:'Satisfying Cooking Videos',desc:'Relaxing cooking content for a fresh feeling',badge:'YouTube · Cooking',url:'https://www.youtube.com/results?search_query=satisfying+cooking+videos+ASMR'},
+      {name:'Mindfulness Practice',desc:'Simple mindfulness exercises for emotional reset',badge:'YouTube · Wellness',url:'https://www.youtube.com/results?search_query=mindfulness+practice+emotional+reset'},
+      {name:'Clean Comedy Shows',desc:'Light-hearted humor to shift your perspective',badge:'YouTube · Comedy',url:'https://www.youtube.com/results?search_query=clean+comedy+feel+good'},
+      {name:'Satisfying Cooking Videos',desc:'Relaxing cooking content for a fresh feeling',badge:'YouTube · Cooking',url:'https://www.youtube.com/results?search_query=satisfying+cooking+videos+ASMR'},
     ]
   },
   Neutral:{
     music:[
-      {icon:'🎵',name:'Lo-fi Study Beats',desc:'Calm background music for focus and productivity',badge:'Spotify · Lo-fi',url:'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn'},
-      {icon:'🎶',name:'Ambient Exploration',desc:'Atmospheric sounds for a neutral, open mind',badge:'Spotify · Ambient',url:'https://open.spotify.com/playlist/37i9dQZF1DX3Ynp6LxW2dK'},
-      {icon:'🎸',name:'Balanced Mix',desc:'A balanced blend of moods for any time of day',badge:'Spotify · Mixed',url:'https://open.spotify.com/playlist/37i9dQZF1DX2sUQwD7tbmL'},
+      {name:'Lo-fi Study Beats',desc:'Calm background music for focus and productivity',badge:'Spotify · Lo-fi',url:'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn'},
+      {name:'Ambient Exploration',desc:'Atmospheric sounds for a neutral, open mind',badge:'Spotify · Ambient',url:'https://open.spotify.com/playlist/37i9dQZF1DX3Ynp6LxW2dK'},
+      {name:'Balanced Mix',desc:'A balanced blend of moods for any time of day',badge:'Spotify · Mixed',url:'https://open.spotify.com/playlist/37i9dQZF1DX2sUQwD7tbmL'},
     ],
     video:[
-      {icon:'📚',name:'Interesting Documentaries',desc:'Engaging documentaries to stimulate your mind',badge:'YouTube · Documentary',url:'https://www.youtube.com/results?search_query=interesting+documentary+2024'},
-      {icon:'🎨',name:'Creative DIY Projects',desc:'Creative activities to spark inspiration',badge:'YouTube · Creative',url:'https://www.youtube.com/results?search_query=creative+DIY+projects+ideas'},
-      {icon:'🌅',name:'Motivational Morning Routine',desc:'Uplifting content to energize your day',badge:'YouTube · Motivation',url:'https://www.youtube.com/results?search_query=motivational+morning+routine'},
+      {name:'Interesting Documentaries',desc:'Engaging documentaries to stimulate your mind',badge:'YouTube · Documentary',url:'https://www.youtube.com/results?search_query=interesting+documentary+2024'},
+      {name:'Creative DIY Projects',desc:'Creative activities to spark inspiration',badge:'YouTube · Creative',url:'https://www.youtube.com/results?search_query=creative+DIY+projects+ideas'},
+      {name:'Motivational Morning Routine',desc:'Uplifting content to energize your day',badge:'YouTube · Motivation',url:'https://www.youtube.com/results?search_query=motivational+morning+routine'},
     ]
   }
 };
@@ -1047,6 +1110,7 @@ async function startScan(){
   const btn=document.getElementById('scan-btn');
   const video=document.getElementById('scan-video');
   const result=document.getElementById('scan-result');
+  const closeBtn = document.getElementById('close-btn');
   btn.classList.add('scanning');btn.innerHTML='<span>⏳</span> Scanning...';
   result.style.display='none';
   try{
@@ -1057,7 +1121,22 @@ async function startScan(){
       scanStream = await navigator.mediaDevices.getUserMedia({video:{width:640,height:480},audio:false});
       video.srcObject = scanStream;
       video.style.display = 'block';
-      await video.play();
+      // Wait for video to load metadata before playing
+      await new Promise((resolve, reject) => {
+        const onloadedmetadata = () => {
+          video.removeEventListener('loadedmetadata', onloadedmetadata);
+          resolve();
+        };
+        const timeout = setTimeout(() => {
+          video.removeEventListener('loadedmetadata', onloadedmetadata);
+          reject(new Error('Video metadata timeout'));
+        }, 5000);
+        video.addEventListener('loadedmetadata', onloadedmetadata);
+      });
+      await video.play().catch(e => {
+        console.error('Video play error:', e);
+        throw new Error('Failed to play video: ' + e.message);
+      });
     }
     const scanData = captureWebcamFrame();
     const prediction = await fetch('/predict', {
@@ -1067,39 +1146,115 @@ async function startScan(){
     });
     const data = await prediction.json();
     const emotionLabel = data.emotion || 'Unknown';
-    const confidence = data.confidence ? (data.confidence * 100).toFixed(1) : 'N/A';
+    // confidence removed from API; do not compute or display it
+    const confidence = null;
     btn.classList.remove('scanning');
     btn.innerHTML='<span>🔍</span> Scan Again';
-    const matched = emotions.find(e=>e.name.toLowerCase()===emotionLabel.toLowerCase()) || {emoji:'🎭',name:emotionLabel, color:'#94a3b8', bg:'rgba(148,163,184,.15)'};
-    const b=document.getElementById('emo-badge');
-    b.style.cssText=`background:${matched.bg};color:${matched.color};border:1px solid ${matched.color}`;
-    b.textContent=`${matched.emoji} ${matched.name}`;
-    document.getElementById('emo-conf').textContent=`Confidence: ${confidence}% · ${new Date().toLocaleTimeString()} · CNN Model`;
-    result.style.display='block';
-    const now=new Date();
-    const entry={emotion:matched.name,emoji:matched.emoji,conf:confidence,date:now.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}),time:now.toLocaleTimeString(),color:matched.color,bg:matched.bg};
-    scanHist.unshift(entry);
-    localStorage.setItem('es_h',JSON.stringify(scanHist.slice(0,100)));
-    if(matched.name==='Sad'){
-      sadCount++;localStorage.setItem('es_sad',sadCount);
-      if(sadCount>=3){notify('🚨 Alert email sent to trusted contact (3 sad detections)!');sadCount=0;localStorage.setItem('es_sad','0');}
+    // show close button when camera is active
+    if(closeBtn) closeBtn.style.display='inline-flex';
+    
+    // Only track and display if face is detected
+    if(emotionLabel !== 'No face detected'){
+      const matched = emotions.find(e=>e.name.toLowerCase()===emotionLabel.toLowerCase()) || {emoji:'🎭',name:emotionLabel, color:'#94a3b8', bg:'rgba(148,163,184,.15)'};
+      const b=document.getElementById('emo-badge');
+      b.style.cssText=`background:transparent;color:${matched.color};border:none`;
+      b.textContent=`Emotion detected: ${matched.name}`;
+      result.style.display='block';
+      const now=new Date();
+      const entry={emotion:matched.name,date:now.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}),time:now.toLocaleTimeString()};
+      // add color/bg locally for rendering (not sent to server); do NOT store emoji
+      entry.color=matched.color; entry.bg=matched.bg;
+      scanHist.unshift(entry);
+      localStorage.setItem('es_h',JSON.stringify(scanHist.slice(0,100)));
+      // send to server if logged in (only emotion, conf, date, time)
+      if(cu && cu.email){
+        fetch('/api/emotion_history', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({email:cu.email, emotion:entry.emotion, date:entry.date, time:entry.time})
+        }).catch(err=>console.error('Persist history failed',err));
+      }
+      if(matched.name==='Sad'){
+        sadCount++;localStorage.setItem('es_sad',sadCount);
+        if(sadCount>=3){notify('🚨 Alert email sent to trusted contact (3 sad detections)!');sadCount=0;localStorage.setItem('es_sad','0');}
+      }
+      loadHistory();updateChatEmoLabel();loadRecs();
+      showPostScanRecs(matched);
+      notify(`EmoSense detected: ${matched.name}`);
+    } else {
+      // clear recommendations and inform user
+      const ps = document.getElementById('post-scan'); if(ps) ps.style.display='none';
+      notify('No face detected — recommendations cleared.');
     }
-    loadHistory();updateChatEmoLabel();loadRecs();showPostScanRecs(matched);
-    notify(`EmoSense detected: ${matched.emoji} ${matched.name} (${confidence}%)`);
   }catch(err){
-    console.error(err);
+    console.error('StartScan error:', err.name, err.message);
     if(err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError'){
       notify('Camera permission denied. Please allow camera access in your browser settings.');
     } else if(err.message === 'Camera API not available'){
       notify('Camera access is not available in this browser. Use a modern browser and run the app from localhost.');
+    } else if(err.message.includes('metadata') || err.message.includes('play')){
+      notify('Camera stream error. Try again or restart the browser.');
     } else {
-      notify('Unable to access webcam. Please allow camera permission and try again.');
+      notify('Unable to access webcam. Error: ' + err.message);
     }
     btn.classList.remove('scanning');
-    btn.innerHTML='<span>🔍</span> Scan My Emotion';
+    btn.innerHTML='<span>🔍</span> Scan';
     scanStream = null;
   }
 }
+
+function closeCamera(){
+  const video=document.getElementById('scan-video');
+  const btn=document.getElementById('scan-btn');
+  const closeBtn=document.getElementById('close-btn');
+  if(scanStream && scanStream.getTracks){
+    scanStream.getTracks().forEach(t=>{try{t.stop();}catch(e){}});
+  }
+  scanStream = null;
+  if(video){ video.pause(); video.srcObject = null; video.style.display='none'; }
+  if(btn){ btn.innerHTML='<span>🔍</span> Scan'; }
+  if(closeBtn){ closeBtn.style.display='none'; }
+  // hide post-scan recommendations
+  const ps = document.getElementById('post-scan'); if(ps) ps.style.display='none';
+  notify('Camera stopped.');
+}
+
+async function autoStartCamera(){
+  const video=document.getElementById('scan-video');
+  const closeBtn=document.getElementById('close-btn');
+  if(scanStream) return; // already started
+  try{
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+      console.warn('Camera API not available - skipping auto-start');
+      return;
+    }
+    scanStream = await navigator.mediaDevices.getUserMedia({video:{width:640,height:480},audio:false});
+    video.srcObject = scanStream;
+    video.style.display = 'block';
+    // Wait for video to load metadata before playing
+    await new Promise((resolve, reject) => {
+      const onloadedmetadata = () => {
+        video.removeEventListener('loadedmetadata', onloadedmetadata);
+        resolve();
+      };
+      const timeout = setTimeout(() => {
+        video.removeEventListener('loadedmetadata', onloadedmetadata);
+        reject(new Error('Video metadata timeout'));
+      }, 5000);
+      video.addEventListener('loadedmetadata', onloadedmetadata);
+    });
+    await video.play().catch(e => console.error('Video play error:', e));
+    if(closeBtn) closeBtn.style.display='inline-flex';
+  } catch(err){
+    console.error('Auto-start camera error:', err.name, err.message);
+    // Silently handle permission denial on auto-start; user can click Scan to retry
+    if(err.name !== 'NotAllowedError' && err.name !== 'PermissionDeniedError'){
+      console.warn('Camera unavailable on auto-start');
+    }
+    scanStream = null;
+  }
+}
+
 
 function captureWebcamFrame(){
   const video=document.getElementById('scan-video');
@@ -1120,22 +1275,49 @@ function showPostScanRecs(e){
   document.getElementById('ps-qa').textContent=qp[1]?`— ${qp[1]}`:'';
   /* music */
   const rd=recData[e.name]||recData.Neutral;
-  document.getElementById('ps-music').innerHTML=rd.music.map(m=>`<a class="ps-rec-card" href="${m.url}" target="_blank"><div class="prc-icon">${m.icon}</div><div class="prc-name">${m.name}</div><div class="prc-desc">${m.desc}</div><span class="prc-badge">${m.badge}</span></a>`).join('');
+  document.getElementById('ps-music').innerHTML=rd.music.map(m=>`<a class="ps-rec-card" href="${m.url}" target="_blank"></div><div class="prc-name">${m.name}</div><div class="prc-desc">${m.desc}</div><span class="prc-badge">${m.badge}</span></a>`).join('');
   /* video */
-  document.getElementById('ps-video').innerHTML=rd.video.map(v=>`<a class="ps-rec-card" href="${v.url}" target="_blank"><div class="prc-icon">${v.icon}</div><div class="prc-name">${v.name}</div><div class="prc-desc">${v.desc}</div><span class="prc-badge">${v.badge}</span></a>`).join('');
+  document.getElementById('ps-video').innerHTML=rd.video.map(v=>`<a class="ps-rec-card" href="${v.url}" target="_blank"></div><div class="prc-name">${v.name}</div><div class="prc-desc">${v.desc}</div><span class="prc-badge">${v.badge}</span></a>`).join('');
   ps.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 /* ════════════ HISTORY ════════════ */
 function loadHistory(){
   const tb=document.getElementById('hist-tbody');if(!tb)return;
+  // if logged in, fetch server-side history
+  if(cu && cu.email){
+    fetch(`/api/emotion_history?email=${encodeURIComponent(cu.email)}`).then(r=>r.json()).then(data=>{
+      if(data.success && data.history){
+        scanHist = data.history.map(h=>{
+          const matched = emotions.find(e=>e.name.toLowerCase()===h.emotion.toLowerCase()) || {emoji:'🎭',name:h.emotion, color:'#94a3b8', bg:'rgba(148,163,184,.15)'};
+          return {emotion:h.emotion,date:h.date,time:h.time,color:matched.color,bg:matched.bg};
+        });
+        localStorage.setItem('es_h',JSON.stringify(scanHist.slice(0,100)));
+      }
+      renderHistoryTable();
+    }).catch(err=>{console.error(err);renderHistoryTable();});
+    return;
+  }
   if(!scanHist.length){
     tb.innerHTML='<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:2.5rem;font-size:.9rem;">No scans yet — go to Scan Emotion and detect your mood first!</td></tr>';return;
   }
   tb.innerHTML=scanHist.map(h=>`<tr>
     <td style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.85rem;">${h.date}</td>
     <td style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.85rem;">${h.time}</td>
-    <td><span class="emo-tag" style="background:${h.bg};color:${h.color};border:1px solid ${h.color}">${h.emoji} ${h.emotion}</span></td>
+    <td><span class="emo-tag" style="background:${h.bg};color:${h.color};border:1px solid ${h.color}">${h.emotion}</span></td>
+  </tr>`).join('');
+}
+
+function renderHistoryTable(){
+  const tb=document.getElementById('hist-tbody');if(!tb)return;
+  if(!scanHist.length){
+    tb.innerHTML='<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:2.5rem;font-size:.9rem;">No scans yet — go to Scan Emotion and detect your mood first!</td></tr>';
+    return;
+  }
+  tb.innerHTML=scanHist.map(h=>`<tr>
+    <td style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.85rem;">${h.date}</td>
+    <td style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.85rem;">${h.time}</td>
+    <td><span class="emo-tag" style="background:${h.bg};color:${h.color};border:1px solid ${h.color}">${h.emotion}</span></td>
   </tr>`).join('');
 }
 
@@ -1144,7 +1326,7 @@ function updateChatEmoLabel(){
   const lbl=document.getElementById('chat-emo-label');if(!lbl)return;
   if(scanHist.length>0){
     const l=scanHist[0];
-    lbl.innerHTML=`Last detected: <span style="color:${l.color};font-weight:700;">${l.emoji} ${l.emotion}</span>`;
+    lbl.innerHTML=`Last detected: <span style="color:${l.color};font-weight:700;">${l.emotion}</span>`;
   } else {
     lbl.textContent='No scan yet';
   }
@@ -1184,18 +1366,58 @@ document.addEventListener('DOMContentLoaded',()=>{
     const w=ta.value.trim().split(/\s+/).filter(Boolean).length;
     document.getElementById('diary-wc').textContent=`${w} word${w!==1?'s':''}`;
   });
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+  if(token){
+    showPage('login');
+    showReset(token);
+  }
 });
 function saveDiary(){
   const text=document.getElementById('diary-text').value.trim();
   if(!text){notify('Please write something first!');return;}
   const now=new Date();
-  diaryE.unshift({text,date:now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),time:now.toLocaleTimeString(),id:Date.now()});
+  const entryObj = {text,date:now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),time:now.toLocaleTimeString(),id:Date.now()};
+  diaryE.unshift(entryObj);
   localStorage.setItem('es_d',JSON.stringify(diaryE.slice(0,50)));
   document.getElementById('diary-text').value='';
   document.getElementById('diary-wc').textContent='0 words';
+  // persist to server when logged in
+  if(cu && cu.email){
+    fetch('/api/diary',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:cu.email,content:text})
+    }).then(r=>r.json()).then(data=>{
+      if(data.success && data.id){
+        diaryE[0].id = data.id;
+        localStorage.setItem('es_d',JSON.stringify(diaryE));
+      }
+    }).catch(err=>console.error('Diary save failed',err));
+  }
   loadDiary();notify('📓 Diary entry saved!');
 }
 function loadDiary(){
+  const c=document.getElementById('diary-entries');if(!c)return;
+  // if logged in, load from server
+  if(cu && cu.email){
+    fetch(`/api/diary?email=${encodeURIComponent(cu.email)}`).then(r=>r.json()).then(data=>{
+      if(data.success && data.entries){
+        diaryE = data.entries.map(ent=>({id:ent.id,text:ent.content,date:new Date(ent.created_at).toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),time:new Date(ent.created_at).toLocaleTimeString()}));
+        localStorage.setItem('es_d',JSON.stringify(diaryE));
+      }
+      renderDiaryList();
+    }).catch(err=>{console.error(err);renderDiaryList();});
+    return;
+  }
+  if(!diaryE.length){c.innerHTML='<p style="color:var(--muted);font-size:.92rem;margin-top:.5rem;">No entries yet — start writing above!</p>';return;}
+  c.innerHTML='<h3 style="font-family:\'Playfair Display\',serif;font-size:1rem;font-weight:800;color:var(--muted);margin-bottom:.8rem;">Previous Entries</h3>'+
+    diaryE.map((e,i)=>`<div class="d-entry" onclick="openDiaryModal(${i})">
+      <div class="d-meta"><span>${e.date}</span><span>${e.time}</span></div>
+      <div class="d-preview">${e.text}</div>
+    </div>`).join('');
+}
+
+function renderDiaryList(){
   const c=document.getElementById('diary-entries');if(!c)return;
   if(!diaryE.length){c.innerHTML='<p style="color:var(--muted);font-size:.92rem;margin-top:.5rem;">No entries yet — start writing above!</p>';return;}
   c.innerHTML='<h3 style="font-family:\'Playfair Display\',serif;font-size:1rem;font-weight:800;color:var(--muted);margin-bottom:.8rem;">Previous Entries</h3>'+
@@ -1232,6 +1454,11 @@ function saveEditDiary(){
   if(!newText){notify('Entry cannot be empty!');return;}
   diaryE[currentDiaryIdx].text=newText;
   localStorage.setItem('es_d',JSON.stringify(diaryE));
+  // persist update to server if entry has id and user logged in
+  const entry = diaryE[currentDiaryIdx];
+  if(cu && cu.email && entry.id){
+    fetch('/api/diary',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:entry.id,content:newText})}).catch(err=>console.error('Diary update failed',err));
+  }
   loadDiary();closeDiaryModal();notify('✅ Diary entry updated!');
 }
 function cancelEditDiary(){
@@ -1242,6 +1469,11 @@ function cancelEditDiary(){
 }
 function deleteDiaryEntry(){
   if(!confirm('Delete this diary entry? This cannot be undone.'))return;
+  const entry = diaryE[currentDiaryIdx];
+  // delete on server if possible
+  if(cu && cu.email && entry && entry.id){
+    fetch('/api/diary',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:entry.id})}).catch(err=>console.error('Diary delete failed',err));
+  }
   diaryE.splice(currentDiaryIdx,1);
   localStorage.setItem('es_d',JSON.stringify(diaryE));
   loadDiary();closeDiaryModal();notify('🗑️ Entry deleted.');
@@ -1281,7 +1513,7 @@ function loadQuoteByEmotion(){
   const q=qs[Math.floor(Math.random()*qs.length)].split(' — ');
   document.getElementById('quote-text').textContent=`"${q[0]}"`;
   document.getElementById('quote-author').textContent=`— ${q[1]||'Unknown'}`;
-  document.getElementById('quote-emotion').textContent=`✨ Matched to your detected emotion: ${scanHist[0].emoji} ${lastEmo}`;
+  document.getElementById('quote-emotion').textContent=`✨ Matched to your detected emotion: ${lastEmo}`;
   document.getElementById('quote-text').classList.remove('quote-loading');
 }
 
@@ -1296,10 +1528,10 @@ function loadRecs(){
     vg.innerHTML='';return;
   }
   const last=scanHist[0];
-  banner.innerHTML=`<span class="reb-badge" style="background:${last.bg};color:${last.color};border:1px solid ${last.color}">${last.emoji} ${last.emotion}</span>`;
+  banner.innerHTML=`<span class="reb-badge" style="background:${last.bg};color:${last.color};border:1px solid ${last.color}">${last.emotion}</span>`;
   const rd=recData[last.emotion]||recData.Neutral;
-  mg.innerHTML=rd.music.map(m=>`<a class="rec-item" href="${m.url}" target="_blank"><div class="ri-icon">${m.icon}</div><div class="ri-name">${m.name}</div><div class="ri-desc">${m.desc}</div><span class="ri-badge">${m.badge}</span></a>`).join('');
-  vg.innerHTML=rd.video.map(v=>`<a class="rec-item" href="${v.url}" target="_blank"><div class="ri-icon">${v.icon}</div><div class="ri-name">${v.name}</div><div class="ri-desc">${v.desc}</div><span class="ri-badge">${v.badge}</span></a>`).join('');
+  mg.innerHTML=rd.music.map(m=>`<a class="rec-item" href="${m.url}" target="_blank"></div><div class="ri-name">${m.name}</div><div class="ri-desc">${m.desc}</div><span class="ri-badge">${m.badge}</span></a>`).join('');
+  vg.innerHTML=rd.video.map(v=>`<a class="rec-item" href="${v.url}" target="_blank"></div><div class="ri-name">${v.name}</div><div class="ri-desc">${v.desc}</div><span class="ri-badge">${v.badge}</span></a>`).join('');
 }
 
 /* ════════════ NOTIFY ════════════ */
@@ -1318,6 +1550,13 @@ const initialPage = {{ page|default('null')|tojson }};
 if(initialPage === 'scan'){
   showPage('dashboard');
   showPanel('scan');
+} else if(initialPage === 'login'){
+  showPage('login');
+} else if(initialPage === 'dashboard'){
+  showPage('dashboard');
+  showPanel('home');
+} else if(initialPage === 'about'){
+  showPage('about');
 } else {
   showPage('landing');
 }
