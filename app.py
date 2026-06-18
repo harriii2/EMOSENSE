@@ -1,4 +1,5 @@
 import os, base64, numpy as np, cv2
+from datetime import datetime
 from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
 import requests as req
@@ -158,7 +159,12 @@ def api_diary():
         if not user:
             cursor.close(); conn.close()
             return jsonify({'success': False, 'message': 'User not found'}), 404
-        cursor.execute('INSERT INTO diary (user_id, content) VALUES (%s,%s)', (user['id'], content))
+        created_at = data.get('created_at')
+        if created_at:
+            cursor.execute('INSERT INTO diary (user_id, content, created_at) VALUES (%s,%s,%s)',
+                           (user['id'], content, created_at))
+        else:
+            cursor.execute('INSERT INTO diary (user_id, content) VALUES (%s,%s)', (user['id'], content))
         conn.commit()
         new_id = cursor.lastrowid
         cursor.close(); conn.close()
@@ -176,6 +182,11 @@ def api_diary():
             return jsonify({'success': False, 'message': 'User not found'}), 404
         cursor.execute('SELECT id, content, created_at, updated_at FROM diary WHERE user_id = %s ORDER BY id DESC LIMIT 200', (user['id'],))
         rows = cursor.fetchall()
+        for row in rows:
+            if isinstance(row.get('created_at'), datetime):
+                row['created_at'] = row['created_at'].strftime('%Y-%m-%d %H:%M:%S')
+            if isinstance(row.get('updated_at'), datetime):
+                row['updated_at'] = row['updated_at'].strftime('%Y-%m-%d %H:%M:%S')
         cursor.close(); conn.close()
         return jsonify({'success': True, 'entries': rows})
 
