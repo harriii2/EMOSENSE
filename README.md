@@ -37,6 +37,7 @@ EmoSense is a real-time facial emotion detection and wellness web application bu
 ├── facialemotionmodel.json
 ├── model.h5
 ├── README.md
+├── LICENSE
 ├── requirements.txt
 ├── static/
 │   └── js/
