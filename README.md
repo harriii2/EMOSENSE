@@ -177,7 +177,6 @@ Your browser will show a security warning for the self-signed cert — click **A
 
 ## Screenshots
 
-```md
 ### Landing Page
 ![Landing Page](https://github.com/harriii2/EMOSENSE/blob/80e53c52b295047a4d6eaeeeba8761dabce27b53/docs/screenshots/landing.png)
 
@@ -192,7 +191,6 @@ Your browser will show a security warning for the self-signed cert — click **A
 
 ### Daily Diary
 ![Daily Diary](https://github.com/harriii2/EMOSENSE/blob/80e53c52b295047a4d6eaeeeba8761dabce27b53/docs/screenshots/diary.png)
-```
 
 ---
 
