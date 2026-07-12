@@ -68,7 +68,7 @@ def chat():
     }
 
     payload = {
-        'model': 'llama3-8b-8192',
+        'model': 'llama-3.1-8b-instant',
         'messages': [
             {
                 'role': 'system',
@@ -94,6 +94,11 @@ You can suggest features like diary writing, music recommendations, or breathing
             json=payload
         )
         result = response.json()
+        print('Groq status:', response.status_code)
+        print('Groq response:', result) 
+        if 'choices' not in result:
+            error_msg = result.get('error', {}).get('message', 'Unknown Groq error')
+            return jsonify({'reply': f"Sorry, I couldn't respond right now."}), 500
         reply = result['choices'][0]['message']['content']
         return jsonify({'reply': reply})
     except Exception as e:
@@ -125,7 +130,27 @@ def api_emotion_history():
                           VALUES (%s,%s,%s,%s)''',
                        (payload['user_id'], payload['emotion'], payload['date'], payload['time']))
         conn.commit()
-        cursor.close(); conn.close()
+        # After insert, check recent sad count and send alert if threshold reached
+        try:
+            cursor.execute('SELECT emotion FROM emotion_history WHERE user_id = %s ORDER BY id DESC LIMIT 10', (payload['user_id'],))
+            recent = cursor.fetchall()
+            sad_count = sum(1 for r in recent if r.get('emotion') and r.get('emotion').lower() == 'sad')
+            if sad_count >= 3:
+                cursor.execute('SELECT trusted_email FROM users WHERE id = %s', (payload['user_id'],))
+                u = cursor.fetchone()
+                trusted = u.get('trusted_email') if u else None
+                if trusted:
+                    try:
+                        from auth.auth_routes import send_alert_email
+                        subject = 'EmoSense Alert: Repeated Sad Detections'
+                        body = f"EmoSense detected 'Sad' emotion {sad_count} times for user {email}. Please check in on them."
+                        send_alert_email(trusted, subject, body)
+                    except Exception as exc:
+                        print('Alert email failed:', exc)
+        except Exception:
+            pass
+        finally:
+            cursor.close(); conn.close()
         return jsonify({'success': True})
 
     # GET

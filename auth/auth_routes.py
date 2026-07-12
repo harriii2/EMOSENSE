@@ -43,6 +43,7 @@ def init_auth_db():
             phone VARCHAR(100),
             location VARCHAR(255),
             trusted_email VARCHAR(255),
+            profile_photo LONGTEXT,
             password VARCHAR(255) NOT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         '''
@@ -112,6 +113,14 @@ def init_auth_db():
     except mysql.connector.Error as exc:
         if exc.errno != 1060:
             raise
+    try:
+        if not column_exists('users', 'profile_photo'):
+            cursor.execute('ALTER TABLE users ADD COLUMN profile_photo LONGTEXT')
+        else:
+            cursor.execute('ALTER TABLE users MODIFY profile_photo LONGTEXT')
+    except mysql.connector.Error as exc:
+        if exc.errno != 1060:
+            raise
 
     conn.commit()
     cursor.close()
@@ -162,6 +171,35 @@ EmoSense Team
         server.quit()
 
 
+def send_alert_email(to_email, subject, body):
+    if not EMAIL_HOST or not EMAIL_USER or not EMAIL_PASSWORD:
+        raise RuntimeError('Email settings are not fully configured. Set EMAIL_HOST, EMAIL_USER and EMAIL_PASSWORD.')
+
+    msg = EmailMessage()
+    msg['Subject'] = subject
+    msg['From'] = EMAIL_FROM
+    msg['To'] = to_email
+    msg.set_content(body)
+
+    if EMAIL_USE_SSL:
+        server = smtplib.SMTP_SSL(EMAIL_HOST, EMAIL_PORT, timeout=10)
+    else:
+        server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT, timeout=10)
+        server.ehlo()
+        if EMAIL_USE_TLS:
+            server.starttls()
+            server.ehlo()
+    try:
+        server.login(EMAIL_USER, EMAIL_PASSWORD)
+        server.send_message(msg)
+    except smtplib.SMTPAuthenticationError as exc:
+        raise RuntimeError(
+            'SMTP authentication failed. Check EMAIL_USER and EMAIL_PASSWORD and use a Gmail app password if required.'
+        ) from exc
+    finally:
+        server.quit()
+
+
 def register_auth_routes(app):
     @app.route('/auth/login', methods=['POST'])
     def login():
@@ -180,7 +218,7 @@ def register_auth_routes(app):
         conn.close()
 
         if user and check_password_hash(user['password'], password):
-            return jsonify({'success': True, 'name': user['full_name'], 'email': user['email']})
+            return jsonify({'success': True, 'name': user['full_name'], 'email': user['email'], 'profile_photo': user.get('profile_photo') or ''})
         return jsonify({'success': False, 'message': 'Invalid credentials'})
 
     @app.route('/auth/register', methods=['POST'])
@@ -293,3 +331,93 @@ def register_auth_routes(app):
         conn.close()
 
         return jsonify({'success': True, 'message': 'Your password has been reset successfully.'})
+
+    @app.route('/auth/account', methods=['GET','POST'])
+    def account():
+        # GET: ?email=...
+        if request.method == 'GET':
+            email = (request.args.get('email') or '').strip().lower()
+            if not email:
+                return jsonify({'success': False, 'message': 'Email required'}), 400
+            conn = get_db(); cursor = conn.cursor(dictionary=True)
+            cursor.execute('SELECT id, full_name, email, phone, location, trusted_email, profile_photo FROM users WHERE email = %s', (email,))
+            user = cursor.fetchone()
+            cursor.close(); conn.close()
+            if not user:
+                return jsonify({'success': False, 'message': 'User not found'}), 404
+            return jsonify({'success': True, 'user': user})
+
+        # POST: update profile/password/alert/photo
+        data = request.get_json() or request.form
+        email = (data.get('email') or '').strip().lower()
+        if not email:
+            return jsonify({'success': False, 'message': 'Email required'}), 400
+        action = (data.get('action') or 'profile').lower()
+
+        conn = get_db(); cursor = conn.cursor(dictionary=True)
+        cursor.execute('SELECT id, password FROM users WHERE email = %s', (email,))
+        user = cursor.fetchone()
+        if not user:
+            cursor.close(); conn.close();
+            return jsonify({'success': False, 'message': 'User not found'}), 404
+
+        if action == 'photo':
+            profile_photo = data.get('profile_photo') or ''
+            if not profile_photo:
+                cursor.close(); conn.close();
+                return jsonify({'success': False, 'message': 'No photo provided.'}), 400
+            cursor.execute('UPDATE users SET profile_photo = %s WHERE id = %s', (profile_photo, user['id']))
+            conn.commit(); cursor.close(); conn.close()
+            return jsonify({'success': True, 'message': 'Profile photo updated.'})
+
+        if action == 'password':
+            current_password = data.get('current_password') or ''
+            new_password = data.get('new_password') or ''
+            confirm_password = data.get('confirm_password') or ''
+            if not current_password or not new_password or not confirm_password:
+                cursor.close(); conn.close();
+                return jsonify({'success': False, 'message': 'Current, new and confirm password are required.'}), 400
+            if not check_password_hash(user['password'], current_password):
+                cursor.close(); conn.close();
+                return jsonify({'success': False, 'message': 'Current password is incorrect.'}), 400
+            if new_password != confirm_password:
+                cursor.close(); conn.close();
+                return jsonify({'success': False, 'message': 'New passwords do not match.'}), 400
+            hashed = generate_password_hash(new_password)
+            cursor.execute('UPDATE users SET password = %s WHERE id = %s', (hashed, user['id']))
+            conn.commit(); cursor.close(); conn.close()
+            return jsonify({'success': True, 'message': 'Password updated.'})
+
+        if action == 'alert':
+            trusted = (data.get('trusted_email') or '').strip().lower()
+            cursor.execute('UPDATE users SET trusted_email = %s WHERE id = %s', (trusted, user['id']))
+            conn.commit(); cursor.close(); conn.close()
+            return jsonify({'success': True, 'message': 'Alert email updated.'})
+
+        full_name = (data.get('full_name') or '').strip()
+        phone = (data.get('phone') or '').strip()
+        location = (data.get('location') or '').strip()
+        cursor.execute('UPDATE users SET full_name = %s, phone = %s, location = %s WHERE id = %s',
+                       (full_name, phone, location, user['id']))
+        conn.commit(); cursor.close(); conn.close()
+        return jsonify({'success': True, 'message': 'Profile updated.'})
+
+    @app.route('/auth/delete', methods=['POST'])
+    def delete_account():
+        data = request.get_json() or request.form
+        email = (data.get('email') or '').strip().lower()
+        password = data.get('password') or ''
+        if not email or not password:
+            return jsonify({'success': False, 'message': 'Email and password required.'}), 400
+        conn = get_db(); cursor = conn.cursor(dictionary=True)
+        cursor.execute('SELECT id, password FROM users WHERE email = %s', (email,))
+        user = cursor.fetchone()
+        if not user:
+            cursor.close(); conn.close();
+            return jsonify({'success': False, 'message': 'User not found'}), 404
+        if not check_password_hash(user['password'], password):
+            cursor.close(); conn.close();
+            return jsonify({'success': False, 'message': 'Password incorrect.'}), 400
+        cursor.execute('DELETE FROM users WHERE id = %s', (user['id'],))
+        conn.commit(); cursor.close(); conn.close()
+        return jsonify({'success': True, 'message': 'Account deleted.'})

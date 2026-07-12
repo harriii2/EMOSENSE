@@ -28,6 +28,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .nav-links a{color:var(--text2);text-decoration:none;padding:.5rem 1.1rem;border-radius:8px;font-size:.95rem;font-weight:500;transition:all .2s;cursor:pointer;}
 .nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(139,92,246,.12);}
 
+/* ── HAMBURGER (main nav, mobile) ── */
+.hamburger-btn{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:42px;height:42px;background:rgba(139,92,246,.1);border:1px solid var(--border2);border-radius:9px;cursor:pointer;padding:0;flex-shrink:0;}
+.hamburger-btn span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;transition:all .25s;}
+.hamburger-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger-btn.open span:nth-child(2){opacity:0;}
+.hamburger-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu-overlay{display:none;position:fixed;inset:0;background:rgba(7,5,14,.7);backdrop-filter:blur(4px);z-index:998;opacity:0;pointer-events:none;transition:opacity .25s;}
+.mobile-menu-overlay.open{opacity:1;pointer-events:all;}
+.mobile-menu{display:none;position:fixed;top:0;right:0;height:100vh;width:74vw;max-width:300px;background:var(--surface);border-left:1px solid var(--border2);z-index:999;flex-direction:column;gap:.3rem;padding:5.4rem 1.2rem 2rem;transform:translateX(100%);transition:transform .3s ease;box-shadow:-18px 0 50px rgba(0,0,0,.4);}
+.mobile-menu.open{transform:translateX(0);}
+.mobile-menu a{color:var(--text2);text-decoration:none;padding:.9rem 1rem;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--text);background:rgba(139,92,246,.14);}
+
 /* ── HERO ── */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden;}
 .hero-mesh{position:absolute;inset:0;background-image:linear-gradient(rgba(139,92,246,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,.05) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 75% 65% at 50% 50%,black,transparent);}
@@ -183,10 +196,17 @@ footer strong{color:var(--accent3);}
 .dash-ni:hover,.dash-ni.active{background:var(--surface2);color:var(--text);}
 .dash-ni.active{color:var(--accent);}
 .dash-ni .ni{font-size:1.05rem;}
+.sidebar-toggle-btn{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:40px;height:40px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;cursor:pointer;padding:0;flex-shrink:0;}
+.sidebar-toggle-btn span{display:block;width:18px;height:2px;background:var(--text);border-radius:2px;}
+.sidebar-close-btn{display:none;background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:1.05rem;align-items:center;justify-content:center;margin-bottom:1rem;align-self:flex-end;}
+.sidebar-close-btn:hover{border-color:var(--danger);color:var(--danger);}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(7,5,14,.7);backdrop-filter:blur(4px);z-index:498;opacity:0;pointer-events:none;transition:opacity .25s;}
+.sidebar-overlay.open{opacity:1;pointer-events:all;}
 .dash-main{flex:1;display:flex;flex-direction:column;min-height:100vh;overflow:hidden;}
 .dash-topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem;border-bottom:1px solid var(--border);background:var(--surface);}
 .dash-greeting h2{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;}
-.prof-btn{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;border:none;color:#fff;font-family:'Playfair Display',serif;font-size:1.15rem;position:relative;}
+.prof-btn{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;border:none;color:#fff;font-family:'Playfair Display',serif;font-size:1.15rem;position:relative;overflow:hidden;padding:0;}
+.prof-btn img{width:100%;height:100%;object-fit:cover;display:block;}
 .prof-popup{position:absolute;top:56px;right:0;background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:1rem;min-width:220px;display:none;z-index:200;box-shadow:0 24px 60px rgba(0,0,0,.55);}
 .prof-popup.open{display:block;}
 .prof-info{padding-bottom:.8rem;border-bottom:1px solid var(--border);margin-bottom:.8rem;}
@@ -318,8 +338,9 @@ footer strong{color:var(--accent3);}
 .acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
 .acc-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:2.2rem;}
 .acc-card h3{font-size:1rem;font-weight:700;margin-bottom:1.4rem;}
-.av-circle{width:86px;height:86px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:900;margin:0 auto 1rem;font-family:'Playfair Display',serif;color:#fff;cursor:pointer;transition:opacity .2s;}
+.av-circle{width:86px;height:86px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:900;margin:0 auto 1rem;font-family:'Playfair Display',serif;color:#fff;cursor:pointer;transition:opacity .2s;overflow:hidden;}
 .av-circle:hover{opacity:.82;}
+.av-circle img{width:100%;height:100%;object-fit:cover;display:block;}
 .uph{font-size:.8rem;color:var(--muted);text-align:center;margin-bottom:1.3rem;}
 .alert-note{background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.2);border-radius:10px;padding:.9rem 1rem;font-size:.84rem;color:var(--text2);line-height:1.65;margin-top:1rem;}
 .alert-note strong{color:var(--sad);}
@@ -334,19 +355,85 @@ footer strong{color:var(--accent3);}
 @keyframes scanPulse{0%,100%{box-shadow:0 0 0 0 rgba(109,40,217,.5);}50%{box-shadow:0 0 0 22px rgba(109,40,217,0);}}
 @keyframes spin{to{transform:rotate(360deg);}}
 .spinner{width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;display:inline-block;vertical-align:middle;}
+
+@media (max-width: 900px){
+  nav{padding:1rem 1.1rem;}
+  .nav-title{font-size:1.45rem;}
+  .nav-links{display:none;}
+  .hamburger-btn{display:flex;}
+  .mobile-menu-overlay,.mobile-menu{display:flex;}
+  .hero{padding:7rem 1rem 3rem;}
+  .hero h1{font-size:clamp(2.2rem,8vw,3.2rem);}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .about-wrapper,.emotions-section,.features-section,.datasets-section,.use-section,.team-section{padding:4rem 1rem;}
+  .emotions-grid,.features-grid,.dataset-grid,.use-grid,.team-grid{grid-template-columns:1fr;}
+  .auth-card{padding:1.4rem;}
+  .field-row{grid-template-columns:1fr;}
+
+  /* Dashboard: sidebar becomes a sliding drawer, not stacked inline */
+  .dash-layout{flex-direction:row;}
+  .sidebar-toggle-btn{display:flex;}
+  .sidebar-close-btn{display:flex;}
+  .sidebar-overlay{display:block;}
+  .dash-sidebar{
+    position:fixed;top:0;left:0;height:100vh;width:78vw;max-width:300px;
+    z-index:499;transform:translateX(-100%);transition:transform .3s ease;
+    box-shadow:18px 0 50px rgba(0,0,0,.4);
+  }
+  .dash-sidebar.open{transform:translateX(0);}
+  .dash-main{min-height:auto;width:100%;}
+  .dash-topbar{padding:1rem;}
+  .dash-content{padding:1rem;}
+  .dash-greeting h2{font-size:1.05rem;}
+  .scan-grid{flex-direction:column;align-items:stretch;}
+  .scan-camera,.scan-controls{width:100%;flex:1 1 auto;}
+  .scan-panel-wrap,.scan-area{padding:1.2rem;}
+  .scan-controls{align-items:stretch;}
+  .btn-row{flex-direction:column;}
+  .quick-grid,.ps-rec-grid,.rec-grid{grid-template-columns:1fr;}
+  .acc-grid{grid-template-columns:1fr;}
+  .acc-card{padding:1.2rem;}
+  .chat-wrap{height:auto;min-height:460px;}
+  .chat-msgs{padding:1rem;}
+  .chat-ir{flex-direction:column;}
+  .chat-send{width:100%;}
+  .diary-card{padding:1rem;}
+  .diary-toolbar{flex-direction:column;align-items:flex-start;gap:.7rem;}
+  .d-meta{flex-direction:column;align-items:flex-start;gap:.2rem;}
+  .notif{left:1rem;right:1rem;bottom:1rem;max-width:none;}
+}
+
+@media (max-width: 520px){
+  .mobile-menu{width:80vw;}
+  .dash-topbar{padding:.8rem;}
+  .dash-content{padding:.8rem;}
+  .scan-btn,.btn-primary,.btn-ghost{width:100%;justify-content:center;}
+  .auth-card{border-radius:16px;}
+  .prof-popup{min-width:calc(100vw - 2rem);right:.75rem;}
+  .dash-greeting h2{font-size:.95rem;}
+}
 </style>
 </head>
 <body>
 
 <!-- ══ NAV ══ -->
 <nav id="main-nav">
-  <div class="nav-title" onclick="showPage('landing')">EmoSense</div>
+  <div class="nav-title" onclick="handleLogoClick()">EmoSense</div>
   <div class="nav-links">
     <a onclick="showPage('landing')" id="nav-home" class="active">Home</a>
     <a onclick="showPage('about')" id="nav-about">About</a>
     <a onclick="showPage('login')" id="nav-login">Login</a>
   </div>
+  <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="mobileNav('landing')" id="mnav-home" class="active">🏠 Home</a>
+  <a onclick="mobileNav('about')" id="mnav-about">ℹ️ About</a>
+  <a onclick="mobileNav('login')" id="mnav-login">🔐 Login</a>
+</div>
 
 <!-- ══════════════════ LANDING ══════════════════ -->
 <div class="page active" id="landing">
@@ -544,7 +631,9 @@ footer strong{color:var(--accent3);}
 <div class="page" id="dashboard">
   <div class="dash-layout">
     <!-- SIDEBAR -->
-    <div class="dash-sidebar">
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+    <div class="dash-sidebar" id="dash-sidebar">
+      <button class="sidebar-close-btn" id="sidebar-close-btn" onclick="closeSidebar()" aria-label="Close sidebar menu">✕</button>
       <div class="dash-logo" onclick="showPanel('home')">EmoSense</div>
       <div class="dash-nl">Features</div>
       <div class="dash-ni active" onclick="showPanel('home')"><span class="ni">🏠</span>Dashboard</div>
@@ -560,7 +649,12 @@ footer strong{color:var(--accent3);}
     <!-- MAIN -->
     <div class="dash-main">
       <div class="dash-topbar">
-        <div class="dash-greeting"><h2 id="greet-msg">Good morning! 👋</h2></div>
+        <div style="display:flex;align-items:center;gap:.8rem;">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Open sidebar menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="dash-greeting"><h2 id="greet-msg">Good morning! 👋</h2></div>
+        </div>
         <div style="position:relative;">
           <button class="prof-btn" id="prof-btn" onclick="toggleProf()">U</button>
           <div class="prof-popup" id="prof-popup">
@@ -637,7 +731,7 @@ footer strong{color:var(--accent3);}
         <div class="dash-panel" id="panel-history">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
             <div><h2 class="ptitle">Emotion History 📊</h2><p class="psub" style="margin:0;">All EmoSense scan sessions stored locally</p></div>
-            <button class="exp-btn" onclick="notify('📄 Currently in development!')">📄 Export PDF</button>
+            <button class="exp-btn" onclick="downloadHistoryPdf()">📄 Export PDF</button>
           </div>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
             <table class="hist-table">
@@ -726,28 +820,29 @@ footer strong{color:var(--accent3);}
           <div class="acc-grid">
             <div class="acc-card">
               <h3>Profile Information</h3>
-              <div class="av-circle" onclick="notify('Photo upload — connect to your Flask backend!')">U</div>
+              <input type="file" id="avatar-input" accept="image/*" style="display:none;" />
+              <div class="av-circle" id="acc-avatar" onclick="triggerAvatarUpload()" role="button" tabindex="0">U</div>
               <p class="uph">Click avatar to upload profile photo</p>
               <div class="field"><label>Full Name</label><input type="text" id="acc-fname" placeholder="Your full name"/></div>
               <!-- <div class="field"><label>Username</label><input type="text" id="acc-un" placeholder="Your username"/></div> -->
-              <div class="field"><label>Location</label><input type="text" placeholder="XXXXXX"/></div>
-              <div class="field"><label>Phone Number</label><input type="tel" placeholder="9800000000"/></div>
-              <button class="save-btn" style="width:100%;padding:.8rem;" onclick="notify('✅ Profile updated!')">Save Changes</button>
+              <div class="field"><label>Location</label><input type="text" id="acc-location" placeholder="City, Country"/></div>
+              <div class="field"><label>Phone Number</label><input type="tel" id="acc-phone" placeholder="9800000000"/></div>
+              <button class="save-btn" style="width:100%;padding:.8rem;" onclick="updateAccount('profile')">Save Changes</button>
             </div>
             <div class="acc-card">
               <h3>Security</h3>
-              <div class="field"><label>Current Password</label><input type="password" placeholder="••••••••"/></div>
-              <div class="field"><label>New Password</label><input type="password" placeholder="••••••••"/></div>
-              <div class="field"><label>Confirm New Password</label><input type="password" placeholder="••••••••"/></div>
-              <button class="save-btn" style="width:100%;padding:.8rem;" onclick="notify('✅ Password updated!')">Update Password</button>
+              <div class="field"><label>Current Password</label><input type="password" id="acc-current-pass" placeholder="••••••••"/></div>
+              <div class="field"><label>New Password</label><input type="password" id="acc-new-pass" placeholder="••••••••"/></div>
+              <div class="field"><label>Confirm New Password</label><input type="password" id="acc-confirm-pass" placeholder="••••••••"/></div>
+              <button class="save-btn" style="width:100%;padding:.8rem;" onclick="updateAccount('password')">Update Password</button>
               <hr style="border:none;border-top:1px solid var(--border);margin:1.5rem 0;"/>
               <h3 style="margin-bottom:1rem;">🚨 Emergency Alert Email</h3>
               <div class="field"><label>Trusted Contact Email</label><input type="email" id="acc-trusted" placeholder="trusted@example.com"/></div>
               <div class="alert-note"><strong>Auto-Alert:</strong> If sad emotion is detected more than 3 times, EmoSense will automatically send an alert email to your trusted contact above.</div>
-              <button class="save-btn" style="width:100%;padding:.8rem;margin-top:1rem;" onclick="notify('✅ Trusted email saved!')">Save Alert Email</button>
+              <button class="save-btn" style="width:100%;padding:.8rem;margin-top:1rem;" onclick="updateAccount('alert')">Save Alert Email</button>
               <hr style="border:none;border-top:1px solid var(--border);margin:1.5rem 0;"/>
               <h4 style="font-size:.92rem;font-weight:700;color:var(--danger);margin-bottom:.8rem;">⚠️ Danger Zone</h4>
-              <button onclick="confirmDelete()" style="background:transparent;border:1px solid var(--danger);color:var(--danger);padding:.72rem;border-radius:8px;cursor:pointer;font-size:.88rem;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">Delete My Account</button>
+              <button onclick="deleteAccount()" style="background:transparent;border:1px solid var(--danger);color:var(--danger);padding:.72rem;border-radius:8px;cursor:pointer;font-size:.88rem;width:100%;font-family:'Plus Jakarta Sans',sans-serif;">Delete My Account</button>
             </div>
           </div>
         </div>
@@ -803,13 +898,59 @@ function showPage(p){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
   document.getElementById(p).classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.querySelectorAll('.mobile-menu a').forEach(a=>a.classList.remove('active'));
   const m={landing:'nav-home',about:'nav-about',login:'nav-login'};
+  const mm={landing:'mnav-home',about:'mnav-about',login:'mnav-login'};
   if(m[p])document.getElementById(m[p])?.classList.add('active');
+  if(mm[p])document.getElementById(mm[p])?.classList.add('active');
   window.scrollTo(0,0);
   document.getElementById('main-nav').style.display=p==='dashboard'?'none':'flex';
   const pageTitles={landing:'EmoSense: AI-Based Facial Emotion Detection & Wellness System', about:'About EmoSense', login:'Login - EmoSense', dashboard:'EmoSense Dashboard'};
   document.title=pageTitles[p]||'EmoSense';
+  closeMobileMenu();
+  closeSidebar();
 }
+
+/* ── MOBILE HAMBURGER MENU (main nav) ── */
+function toggleMobileMenu(){
+  const btn=document.getElementById('hamburger-btn');
+  const menu=document.getElementById('mobile-menu');
+  const overlay=document.getElementById('mobile-menu-overlay');
+  const isOpen=menu.classList.toggle('open');
+  overlay.classList.toggle('open',isOpen);
+  btn.classList.toggle('open',isOpen);
+  btn.setAttribute('aria-expanded',isOpen?'true':'false');
+}
+function closeMobileMenu(){
+  document.getElementById('hamburger-btn')?.classList.remove('open');
+  document.getElementById('mobile-menu')?.classList.remove('open');
+  document.getElementById('mobile-menu-overlay')?.classList.remove('open');
+  document.getElementById('hamburger-btn')?.setAttribute('aria-expanded','false');
+}
+function mobileNav(p){
+  showPage(p);
+}
+
+/* ── DASHBOARD SIDEBAR DRAWER (mobile) ── */
+function toggleSidebar(){
+  const sb=document.getElementById('dash-sidebar');
+  const overlay=document.getElementById('sidebar-overlay');
+  const isOpen=sb.classList.toggle('open');
+  overlay.classList.toggle('open',isOpen);
+}
+function closeSidebar(){
+  document.getElementById('dash-sidebar')?.classList.remove('open');
+  document.getElementById('sidebar-overlay')?.classList.remove('open');
+}
+function handleLogoClick(){
+  if(cu && cu.email){
+    showPage('dashboard');
+    showPanel('home');
+  } else {
+    showPage('landing');
+  }
+}
+
 
 /* ════════════ AUTH ════════════ */
 async function authFetch(path, options){
@@ -848,7 +989,10 @@ async function doLogin(){
       notify(data.message||'Invalid credentials.');
       return;
     }
-    setUser(data.email,data.name);
+    // persist session locally for 30 minutes
+    const expires = Date.now() + 30 * 60 * 1000; // 30 minutes
+    localStorage.setItem('es_user', JSON.stringify({email:data.email, name:data.name, profile_photo:data.profile_photo || '', expires}));
+    setUser(data.email,data.name,data.profile_photo || '');
     showPage('dashboard');
     initDash();
     notify(`Welcome back, ${data.name}!`);
@@ -951,14 +1095,93 @@ async function doReset(){
     notify('Unable to reset password. Please try again later.');
   }
 }
-function doLogout(){showPage('landing');document.getElementById('main-nav').style.display='flex';}
-function setUser(email,name){
-  cu.email=email;cu.name=name||email.split('@')[0];
-  document.getElementById('popup-name').textContent=cu.name;
-  document.getElementById('popup-email').textContent=email;
-  document.getElementById('prof-btn').textContent=cu.name[0].toUpperCase();
-  if(document.getElementById('acc-un'))document.getElementById('acc-un').value=cu.name;
-  if(document.getElementById('acc-fname'))document.getElementById('acc-fname').value=cu.name;
+function updateUserDisplay(name, email, photoData=''){
+  const safeName = (name || '').trim() || (email || '').split('@')[0] || 'User';
+  cu.email = email || cu.email || '';
+  cu.name = safeName;
+  cu.profile_photo = photoData || cu.profile_photo || '';
+  const popupName = document.getElementById('popup-name');
+  const popupEmail = document.getElementById('popup-email');
+  const greet = document.getElementById('greet-msg');
+  if(popupName) popupName.textContent = safeName;
+  if(popupEmail) popupEmail.textContent = cu.email;
+  renderProfileButton(cu.profile_photo || photoData || '');
+  if(document.getElementById('acc-un')) document.getElementById('acc-un').value = safeName;
+  if(document.getElementById('acc-fname')) document.getElementById('acc-fname').value = safeName;
+  if(greet){
+    const h=new Date().getHours();
+    let g='Good morning';
+    if(h>=12&&h<17)g='Good afternoon';
+    else if(h>=17&&h<21)g='Good evening';
+    else if(h>=21)g='Good night';
+    greet.textContent=`${g}, ${safeName}!`;
+  }
+  const raw = localStorage.getItem('es_user');
+  if(raw){
+    try{ const u = JSON.parse(raw); u.name = safeName; u.email = cu.email; u.profile_photo = cu.profile_photo || ''; u.expires = Date.now() + 30*60*1000; localStorage.setItem('es_user', JSON.stringify(u)); }catch(e){}
+  }
+}
+
+function renderProfileButton(photoData){
+  const profBtn = document.getElementById('prof-btn');
+  if(!profBtn) return;
+  if(photoData){
+    profBtn.innerHTML = `<img src="${photoData}" alt="Profile photo">`;
+  } else {
+    profBtn.textContent = (cu && cu.name) ? cu.name.charAt(0).toUpperCase() : 'U';
+    profBtn.innerHTML = profBtn.textContent;
+  }
+}
+
+function doLogout(){
+  cu = {name:'User', email:'', trustedEmail:''};
+  const popupName = document.getElementById('popup-name');
+  const popupEmail = document.getElementById('popup-email');
+  const profBtn = document.getElementById('prof-btn');
+  if(popupName) popupName.textContent = cu.name;
+  if(popupEmail) popupEmail.textContent = '';
+  if(profBtn) { profBtn.textContent = 'E'; profBtn.innerHTML = profBtn.textContent; }
+  localStorage.removeItem('es_user');
+  clearLogoutTimer();
+  showPage('landing');
+  document.getElementById('main-nav').style.display='flex';
+  notify('Logged out successfully.');
+}
+
+function setUser(email,name,photoData=''){
+  cu.profile_photo = photoData || '';
+  updateUserDisplay(name, email, photoData);
+  startLogoutTimer();
+}
+
+// Session helpers: restore session from localStorage and auto-logout
+let _logoutTimer = null;
+function startLogoutTimer(){
+  clearLogoutTimer();
+  const raw = localStorage.getItem('es_user');
+  if(!raw) return;
+  try{
+    const u = JSON.parse(raw);
+    const remaining = u.expires - Date.now();
+    if(remaining <= 0){ doLogout(); return; }
+    _logoutTimer = setTimeout(()=>{
+      notify('Session expired. You have been logged out.');
+      doLogout();
+    }, remaining);
+  }catch(e){ }
+}
+function clearLogoutTimer(){ if(_logoutTimer) { clearTimeout(_logoutTimer); _logoutTimer=null; } }
+function restoreSession(){
+  const raw = localStorage.getItem('es_user');
+  if(!raw) return false;
+  try{
+    const u = JSON.parse(raw);
+    if(!u.email || !u.name) return false;
+    if(u.expires && Date.now() > u.expires){ localStorage.removeItem('es_user'); return false; }
+    setUser(u.email, u.name);
+    startLogoutTimer();
+    return true;
+  }catch(e){ return false; }
 }
 
 /* ════════════ XAMPP TOGGLE ════════════ */
@@ -977,7 +1200,7 @@ function initDash(){
   document.getElementById('greet-msg').textContent=`${g}, ${cu.name}!`;
   if(document.getElementById('diary-date'))
     document.getElementById('diary-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  loadHistory();loadDiary();loadQuote();loadRecs();updateChatEmoLabel();
+  loadHistory();loadDiary();loadQuote();loadRecs();updateChatEmoLabel();loadAccount();
 }
 
 /* ════════════ PANEL SWITCHING ════════════ */
@@ -991,9 +1214,12 @@ function showPanel(id){
   if(id==='recs')loadRecs();
   if(id==='quote')loadQuote();
   if(id==='chat')updateChatEmoLabel();
-  if(id==='scan')autoStartCamera();
+  if(id==='scan') setTimeout(autoStartCamera, 200);
+  if(id==='account') loadAccount();
   const panelTitles={home:'Dashboard - EmoSense', scan:'Scan Emotion - EmoSense', history:'Emotion History - EmoSense', chat:'AI Chatbot - EmoSense', diary:'Daily Diary - EmoSense', quote:'Daily Quote - EmoSense', recs:'Recommendations - EmoSense', account:'Account Settings - EmoSense'};
   document.title=panelTitles[id]||'EmoSense Dashboard';
+  closeSidebar();
+  window.scrollTo(0,0);
 }
 
 /* ════════════ PROFILE POPUP ════════════ */
@@ -1116,7 +1342,14 @@ async function startScan(){
       throw new Error('Camera API not available');
     }
     if(!scanStream){
-      scanStream = await navigator.mediaDevices.getUserMedia({video:{width:640,height:480},audio:false});
+      scanStream = await navigator.mediaDevices.getUserMedia({
+        video:{
+          facingMode:'user',
+          width:{ideal:1280},
+          height:{ideal:720}
+        },
+        audio:false
+      });
       video.srcObject = scanStream;
       video.style.display = 'block';
       // Wait for video to load metadata before playing
@@ -1164,13 +1397,14 @@ async function startScan(){
       entry.color=matched.color; entry.bg=matched.bg;
       scanHist.unshift(entry);
       localStorage.setItem('es_h',JSON.stringify(scanHist.slice(0,100)));
+      renderHistoryTable();
       // send to server if logged in (only emotion, conf, date, time)
       if(cu && cu.email){
-        fetch('/api/emotion_history', {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify({email:cu.email, emotion:entry.emotion, date:entry.date, time:entry.time})
-        }).catch(err=>console.error('Persist history failed',err));
+          fetch('/api/emotion_history', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({email:cu.email, emotion:entry.emotion, date:entry.date, time:entry.time})
+          }).then(()=>loadHistory()).catch(err=>console.error('Persist history failed',err));
       }
       if(matched.name==='Sad'){
         sadCount++;localStorage.setItem('es_sad',sadCount);
@@ -1226,7 +1460,14 @@ async function autoStartCamera(){
       console.warn('Camera API not available - skipping auto-start');
       return;
     }
-    scanStream = await navigator.mediaDevices.getUserMedia({video:{width:640,height:480},audio:false});
+    scanStream = await navigator.mediaDevices.getUserMedia({
+      video:{
+        facingMode:'user',
+        width:{ideal:1280},
+        height:{ideal:720}
+      },
+      audio:false
+    });
     video.srcObject = scanStream;
     video.style.display = 'block';
     // Wait for video to load metadata before playing
@@ -1282,6 +1523,7 @@ function showPostScanRecs(e){
 /* ════════════ HISTORY ════════════ */
 function loadHistory(){
   const tb=document.getElementById('hist-tbody');if(!tb)return;
+  if(scanHist.length) renderHistoryTable();
   // if logged in, fetch server-side history
   if(cu && cu.email){
     fetch(`/api/emotion_history?email=${encodeURIComponent(cu.email)}`).then(r=>r.json()).then(data=>{
@@ -1318,6 +1560,52 @@ function renderHistoryTable(){
     <td><span class="emo-tag" style="background:${h.bg};color:${h.color};border:1px solid ${h.color}">${h.emotion}</span></td>
   </tr>`).join('');
 }
+function escapePdfText(text){
+  return String(text).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+}
+function downloadHistoryPdf(){
+  if(!scanHist.length){
+    notify('No history available to export.');
+    return;
+  }
+  const header = 'EmoSense Emotion History';
+  const lines = [header, '', 'Date | Time | Emotion', '----------------------------------------'];
+  scanHist.slice(0, 100).forEach(row=>{
+    lines.push(`${row.date} | ${row.time} | ${row.emotion}`);
+  });
+  const contentLines = lines.map(line => `(${escapePdfText(line)}) Tj\n0 -18 Td\n`).join('');
+  const stream = `BT\n/F1 12 Tf\n50 750 Td\n${contentLines}ET`;
+  const encoder = new TextEncoder();
+  const streamBytes = encoder.encode(stream);
+  const streamLength = streamBytes.length;
+  const headerStr = '%PDF-1.3\n';
+  const objects = [
+    `1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n`,
+    `2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n`,
+    `3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>\nendobj\n`,
+    `4 0 obj\n<< /Length ${streamLength} >>\nstream\n${stream}\nendstream\nendobj\n`,
+    `5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n`
+  ];
+  let offset = encoder.encode(headerStr).length;
+  const xrefLines = ['xref\n0 6\n0000000000 65535 f \n'];
+  objects.forEach(obj => {
+    const pos = String(offset).padStart(10,'0');
+    xrefLines.push(`${pos} 00000 n \n`);
+    offset += encoder.encode(obj).length;
+  });
+  const xref = xrefLines.join('');
+  const trailer = `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${offset}\n%%EOF`;
+  const pdf = `${headerStr}${objects.join('')}${xref}${trailer}`;
+  const blob = new Blob([pdf], {type:'application/pdf'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'emosense-history.pdf';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
 /* ════════════ CHAT (emotion-aware) ════════════ */
 function updateChatEmoLabel(){
@@ -1330,31 +1618,46 @@ function updateChatEmoLabel(){
   }
 }
 
-const botsByEmo={
-  Happy:["AI Chatbot - Under Development"],
-  Sad:["AI Chatbot - Under Development"],
-  Angry:["AI Chatbot - Under Development"],
-  Surprise:["AI Chatbot - Under Development"],
-  Fear:["AI Chatbot - Under Development"],
-  Disgust:["AI Chatbot - Under Development"],
-  Neutral:["AI Chatbot - Under Development"],
-};
+function appendTypingIndicator(){
+  const msgs=document.getElementById('chat-msgs');
+  const el=document.createElement('div');
+  el.className='msg bot';
+  el.id='typing-indicator';
+  el.innerHTML=`<div class="msg-bubble">EmoSense AI is typing…</div>`;
+  msgs.appendChild(el);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function removeTypingIndicator(){
+  document.getElementById('typing-indicator')?.remove();
+}
 
-const fallbackBots=["I'm here to support you! 💜 Tell me more about how you're feeling.","EmoSense AI is listening — go ahead and share whatever's on your mind.","Every emotion matters. I'm here with you, whatever you're going through 🌟","Would you like a recommendation based on your mood, or would you prefer to just talk?"];
-
-function sendChat(){
+async function sendChat(){
   const inp=document.getElementById('chat-inp');
   const msg=inp.value.trim();if(!msg)return;
   const msgs=document.getElementById('chat-msgs');
   msgs.innerHTML+=`<div class="msg user"><div class="msg-bubble">${msg}</div></div>`;
   inp.value='';msgs.scrollTop=msgs.scrollHeight;
-  const lastEmo=scanHist.length>0?scanHist[0].emotion:null;
-  const pool=(lastEmo&&botsByEmo[lastEmo])?botsByEmo[lastEmo]:fallbackBots;
-  setTimeout(()=>{
-    const reply=pool[Math.floor(Math.random()*pool.length)];
+
+  const lastEmo = scanHist.length>0 ? scanHist[0].emotion : 'neutral';
+  appendTypingIndicator();
+
+  try{
+    const res = await fetch('/api/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ message: msg, emotion: lastEmo })
+    });
+    const data = await res.json();
+    removeTypingIndicator();
+    const reply = data.reply || "Sorry, I couldn't respond right now.";
     msgs.innerHTML+=`<div class="msg bot"><div class="msg-bubble">${reply}</div></div>`;
     msgs.scrollTop=msgs.scrollHeight;
-  },900);
+  }catch(err){
+    console.error('Chat error:', err);
+    removeTypingIndicator();
+    msgs.innerHTML+=`<div class="msg bot"><div class="msg-bubble">Sorry, I couldn't connect right now. Please try again.</div></div>`;
+    msgs.scrollTop=msgs.scrollHeight;
+  }
 }
 
 /* ════════════ DIARY ════════════ */
@@ -1364,6 +1667,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     const w=ta.value.trim().split(/\s+/).filter(Boolean).length;
     document.getElementById('diary-wc').textContent=`${w} word${w!==1?'s':''}`;
   });
+  const avatarInput=document.getElementById('avatar-input');
+  if(avatarInput) avatarInput.addEventListener('change', uploadAvatar);
   const params = new URLSearchParams(window.location.search);
   const token = params.get('token');
   if(token){
@@ -1400,33 +1705,44 @@ function formatDiaryTime(value){
   if(!date || Number.isNaN(date.getTime())) return '';
   return new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kathmandu',hour:'2-digit',minute:'2-digit',hour12:false}).format(date);
 }
-function saveDiary(){
+async function saveDiary(){
   const text=document.getElementById('diary-text').value.trim();
   if(!text){notify('Please write something first!');return;}
-  const entryObj = {text,date:'',time:'',id:Date.now()};
+  const now = new Date();
+  const entryObj = {
+    text,
+    date: formatDiaryDate(now.toISOString()),
+    time: formatDiaryTime(now.toISOString()),
+    created_at: now.toISOString(),
+    updated_at: now.toISOString(),
+    id: Date.now()
+  };
   diaryE.unshift(entryObj);
   localStorage.setItem('es_d',JSON.stringify(diaryE.slice(0,50)));
   document.getElementById('diary-text').value='';
   document.getElementById('diary-wc').textContent='0 words';
-  // persist to server when logged in
+  renderDiaryList();
   if(cu && cu.email){
-    fetch('/api/diary',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:cu.email,content:text})
-    }).then(r=>r.json()).then(data=>{
+    try{
+      const r=await fetch('/api/diary',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:cu.email,content:text})});
+      const data=await r.json();
       if(data.success && data.id){
         diaryE[0].id = data.id;
         localStorage.setItem('es_d',JSON.stringify(diaryE));
       }
-    }).catch(err=>console.error('Diary save failed',err));
+    }catch(err){console.error('Diary save failed',err)}
+    await loadDiary();
+  } else {
+    await loadDiary();
   }
-  loadDiary();notify('📓 Diary entry saved!');
+  notify('📓 Diary entry saved!');
 }
-function loadDiary(){
+async function loadDiary(){
   const c=document.getElementById('diary-entries');if(!c)return;
-  // if logged in, load from server
   if(cu && cu.email){
-    fetch(`/api/diary?email=${encodeURIComponent(cu.email)}`).then(r=>r.json()).then(data=>{
+    try{
+      const r=await fetch(`/api/diary?email=${encodeURIComponent(cu.email)}`);
+      const data=await r.json();
       if(data.success && data.entries){
         diaryE = data.entries.map(ent=>({
           id:ent.id,
@@ -1438,8 +1754,8 @@ function loadDiary(){
         }));
         localStorage.setItem('es_d',JSON.stringify(diaryE));
       }
-      renderDiaryList();
-    }).catch(err=>{console.error(err);renderDiaryList();});
+    }catch(err){console.error(err);}
+    renderDiaryList();
     return;
   }
   if(!diaryE.length){c.innerHTML='<p style="color:var(--muted);font-size:.92rem;margin-top:.5rem;">No entries yet — start writing above!</p>';return;}
@@ -1482,17 +1798,18 @@ function startEditDiary(){
     <button class="dm-btn dm-cancel" onclick="cancelEditDiary()">✕ Cancel</button>
     <button class="dm-btn dm-delete" onclick="deleteDiaryEntry()">🗑️ Delete</button>`;
 }
-function saveEditDiary(){
+async function saveEditDiary(){
   const newText=document.getElementById('dm-text').value.trim();
   if(!newText){notify('Entry cannot be empty!');return;}
   diaryE[currentDiaryIdx].text=newText;
   localStorage.setItem('es_d',JSON.stringify(diaryE));
-  // persist update to server if entry has id and user logged in
   const entry = diaryE[currentDiaryIdx];
   if(cu && cu.email && entry.id){
-    fetch('/api/diary',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:entry.id,content:newText})}).catch(err=>console.error('Diary update failed',err));
+    try{
+      await fetch('/api/diary',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:entry.id,content:newText})});
+    }catch(err){console.error('Diary update failed',err);}
   }
-  loadDiary();closeDiaryModal();notify('✅ Diary entry updated!');
+  await loadDiary();closeDiaryModal();notify('✅ Diary entry updated!');
 }
 function cancelEditDiary(){
   const ta=document.getElementById('dm-text');
@@ -1500,16 +1817,17 @@ function cancelEditDiary(){
   ta.readOnly=true;ta.classList.remove('editing');
   showModalReadonly();
 }
-function deleteDiaryEntry(){
+async function deleteDiaryEntry(){
   if(!confirm('Delete this diary entry? This cannot be undone.'))return;
   const entry = diaryE[currentDiaryIdx];
-  // delete on server if possible
   if(cu && cu.email && entry && entry.id){
-    fetch('/api/diary',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:entry.id})}).catch(err=>console.error('Diary delete failed',err));
+    try{
+      await fetch('/api/diary',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:entry.id})});
+    }catch(err){console.error('Diary delete failed',err);}
   }
   diaryE.splice(currentDiaryIdx,1);
   localStorage.setItem('es_d',JSON.stringify(diaryE));
-  loadDiary();closeDiaryModal();notify('🗑️ Entry deleted.');
+  await loadDiary();closeDiaryModal();notify('🗑️ Entry deleted.');
 }
 function closeDiaryModal(){document.getElementById('diary-modal').classList.remove('open');}
 document.getElementById('diary-modal').addEventListener('click',e=>{
@@ -1572,6 +1890,105 @@ function notify(msg){
   const n=document.getElementById('notif');n.textContent=msg;
   n.classList.add('show');setTimeout(()=>n.classList.remove('show'),3500);
 }
+
+// Account management client functions
+function triggerAvatarUpload(){
+  document.getElementById('avatar-input')?.click();
+}
+function setAvatarPreview(photoData){
+  const avatar=document.getElementById('acc-avatar');
+  if(!avatar) return;
+  if(photoData){
+    avatar.innerHTML=`<img src="${photoData}" alt="Profile photo">`;
+    if(cu) cu.profile_photo = photoData;
+    renderProfileButton(photoData);
+  } else {
+    avatar.textContent = (cu && cu.name) ? cu.name.charAt(0).toUpperCase() : 'U';
+    renderProfileButton('');
+  }
+}
+async function uploadAvatar(){
+  const input=document.getElementById('avatar-input');
+  if(!input||!input.files||!input.files.length||!cu||!cu.email) return;
+  const file=input.files[0];
+  if(!file.type.startsWith('image/')){ notify('Please choose an image file.'); return; }
+  const reader=new FileReader();
+  reader.onload = async ()=>{
+    try{
+      const res = await fetch('/auth/account', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email: cu.email, action: 'photo', profile_photo: reader.result})});
+      const data = await res.json();
+      if(!data.success){ notify(data.message||'Unable to upload photo'); return; }
+      setAvatarPreview(reader.result);
+      notify('✅ Profile photo updated');
+    }catch(err){ console.error(err); notify('Photo upload failed'); }
+  };
+  reader.readAsDataURL(file);
+}
+async function loadAccount(){
+  if(!cu || !cu.email) return;
+  try{
+    const res = await fetch(`/auth/account?email=${encodeURIComponent(cu.email)}`);
+    const data = await res.json();
+    if(data.success && data.user){
+      const u = data.user;
+      document.getElementById('acc-fname').value = u.full_name || '';
+      document.getElementById('acc-phone').value = u.phone || '';
+      document.getElementById('acc-location').value = u.location || '';
+      document.getElementById('acc-trusted').value = u.trusted_email || '';
+      updateUserDisplay(u.full_name || '', cu.email);
+      setAvatarPreview(u.profile_photo || '');
+    }
+  }catch(err){console.error('Load account failed',err)}
+}
+
+async function updateAccount(action='profile'){
+  if(!cu || !cu.email){ notify('Please login to update account.'); return; }
+  const payload = { email: cu.email, action };
+  if(action === 'profile'){
+    payload.full_name = document.getElementById('acc-fname').value.trim();
+    payload.phone = document.getElementById('acc-phone').value.trim();
+    payload.location = document.getElementById('acc-location').value.trim();
+  } else if(action === 'password'){
+    const current = document.getElementById('acc-current-pass').value || '';
+    const np = document.getElementById('acc-new-pass').value || '';
+    const cp = document.getElementById('acc-confirm-pass').value || '';
+    if(!current || !np || !cp){ notify('Please fill current, new and confirm password.'); return; }
+    if(np !== cp){ notify('New passwords do not match.'); return; }
+    payload.current_password = current;
+    payload.new_password = np;
+    payload.confirm_password = cp;
+  } else if(action === 'alert'){
+    payload.trusted_email = document.getElementById('acc-trusted').value.trim();
+  }
+  try{
+    const res = await fetch('/auth/account', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+    const data = await res.json();
+    if(!data.success){ notify(data.message||'Unable to update account'); return; }
+    if(action === 'password'){
+      document.getElementById('acc-current-pass').value='';
+      document.getElementById('acc-new-pass').value='';
+      document.getElementById('acc-confirm-pass').value='';
+    }
+    if(action === 'profile') {
+      updateUserDisplay(payload.full_name || cu.name, cu.email);
+    }
+    notify(data.message || '✅ Account updated');
+  }catch(err){ console.error(err); notify('Update failed'); }
+}
+
+async function deleteAccount(){
+  if(!cu || !cu.email){ notify('Please login to delete account'); return; }
+  if(!confirm('Delete your account and all data? This cannot be undone.')) return;
+  const pw = prompt('Enter your current password to confirm');
+  if(!pw) return;
+  try{
+    const res = await fetch('/auth/delete', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email: cu.email, password: pw})});
+    const data = await res.json();
+    if(!data.success){ notify(data.message||'Unable to delete account'); return; }
+    notify('Account deleted');
+    doLogout();
+  }catch(err){ console.error(err); notify('Delete failed'); }
+}
 function confirmDelete(){
   if(confirm('Are you sure you want to delete your account? This cannot be undone.')){
     notify('Account deleted. Goodbye!');setTimeout(doLogout,1500);
@@ -1580,18 +1997,27 @@ function confirmDelete(){
 
 /* ════════════ INIT ════════════ */
 const initialPage = {{ page|default('null')|tojson }};
-if(initialPage === 'scan'){
-  showPage('dashboard');
-  showPanel('scan');
-} else if(initialPage === 'login'){
-  showPage('login');
-} else if(initialPage === 'dashboard'){
-  showPage('dashboard');
-  showPanel('home');
-} else if(initialPage === 'about'){
-  showPage('about');
+// restore session from localStorage if available
+const restored = restoreSession();
+if(restored){
+  // keep user on dashboard when session exists
+  if(initialPage === 'scan'){
+    showPage('dashboard'); showPanel('scan');
+  } else {
+    showPage('dashboard'); showPanel('home');
+  }
 } else {
-  showPage('landing');
+  if(initialPage === 'scan'){
+    showPage('dashboard'); showPanel('scan');
+  } else if(initialPage === 'login'){
+    showPage('login');
+  } else if(initialPage === 'dashboard'){
+    showPage('dashboard'); showPanel('home');
+  } else if(initialPage === 'about'){
+    showPage('about');
+  } else {
+    showPage('landing');
+  }
 }
 </script>
 </body>
