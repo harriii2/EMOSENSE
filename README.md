@@ -61,8 +61,8 @@ EmoSense is a real-time facial emotion detection and wellness web application bu
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
+git clone https://github.com/harriii2/EMOSENSE.git
+cd EMOSENSE
 ```
 
 ### 2. Create a Python 3.9 virtual environment
@@ -177,22 +177,20 @@ Your browser will show a security warning for the self-signed cert — click **A
 
 ## Screenshots
 
-```md
 ### Landing Page
-![Landing Page](docs/screenshots/landing.png)
+![Landing Page](https://github.com/harriii2/EMOSENSE/blob/80e53c52b295047a4d6eaeeeba8761dabce27b53/docs/screenshots/landing.png)
 
 ### Dashboard
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](https://github.com/harriii2/EMOSENSE/blob/80e53c52b295047a4d6eaeeeba8761dabce27b53/docs/screenshots/dashboard.png)
 
 ### Emotion Scan
-![Emotion Scan](docs/screenshots/scan.png)
+![Emotion Scan](https://github.com/harriii2/EMOSENSE/blob/80e53c52b295047a4d6eaeeeba8761dabce27b53/docs/screenshots/scan.png)
 
 ### Emotion History
-![Emotion History](docs/screenshots/history.png)
+![Emotion History](https://github.com/harriii2/EMOSENSE/blob/80e53c52b295047a4d6eaeeeba8761dabce27b53/docs/screenshots/history.png)
 
 ### Daily Diary
-![Daily Diary](docs/screenshots/diary.png)
-```
+![Daily Diary](https://github.com/harriii2/EMOSENSE/blob/80e53c52b295047a4d6eaeeeba8761dabce27b53/docs/screenshots/diary.png)
 
 ---
 
