@@ -1,4 +1,4 @@
-# EmoSense — AI-Based Facial Emotion Detection & Wellness System
+# EmoSense — AI-Based Facial Emotion Detection & Wellness System 
 
 EmoSense is a real-time facial emotion detection and wellness web application built with **Flask**, **TensorFlow/Keras (CNN)**, and **OpenCV**. It detects a user's emotional state from their webcam feed and provides emotion-aware features: history tracking, a daily diary, an AI chatbot, personalized music/video recommendations, daily quotes, and emergency email alerts for trusted contacts.
 
